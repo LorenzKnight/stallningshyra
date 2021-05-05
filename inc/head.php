@@ -18,7 +18,6 @@
                 <div class="dropdown-config-content">
                     <ul>
                         <li><a href="index.php">Hem</a></li>
-                        <li><a style="border-top: 1px solid #333;" href="reserve.php">Boka</a></li>
                         <li><a style="border-top: 1px solid #333;" href="about.php" >Om oss</a></li>
                         <li><a style="border-top: 1px solid #333;" href="contact.php" >Kontakt</a></li>
                     </ul>

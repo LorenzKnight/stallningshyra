@@ -647,6 +647,28 @@ function ObtenerCiudadProducto($ciudadProducto)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function ObtenerSemanaID($semanaNo, $semanaAno)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT id_week FROM weeks WHERE week_no = %s AND year = %s",
+										GetSQLValueString($semanaNo, "int"),
+										GetSQLValueString($semanaAno, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["id_week"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function ObtenerNombreSemana($nombreSemana)
 {
 	global $con;
@@ -659,6 +681,27 @@ function ObtenerNombreSemana($nombreSemana)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
 	return $row_ConsultaFuncion["week"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerAnoSemana($anoSemana)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT year FROM weeks WHERE id_week = %s ",
+		 GetSQLValueString($anoSemana, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["year"];	
 	
 	mysqli_free_result($ConsultaFuncion);
 }
@@ -689,12 +732,36 @@ function ObtenerPrecioSemana($precioSemana)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function semanasInactiva($idSem)
+// function semanasInactiva2($idSem)
+// {
+// 	global $con;
+	
+// 	$query_ConsultaFuncion = sprintf("SELECT * FROM weeks WHERE id_week = %s AND status = 0",
+// 										 GetSQLValueString($idSem, "int"));
+// 	// echo $query_ConsultaFuncion;
+// 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+// 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+// 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+// 	if ($totalRows_ConsultaFuncion != 0) 
+// 		return false;
+// 	else return true;
+	
+// 	mysqli_free_result($ConsultaFuncion);
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function semanasInactiva($semNo, $ano)
 {
 	global $con;
 	
-	$query_ConsultaFuncion = sprintf("SELECT * FROM weeks WHERE id_week = %s AND status = 0",
-										 GetSQLValueString($idSem, "int"));
+	$query_ConsultaFuncion = sprintf("SELECT * FROM weeks WHERE week_no = %s AND year = %s AND status = 0",
+										 GetSQLValueString($semNo, "int"),
+										 GetSQLValueString($ano, "int"));
 	// echo $query_ConsultaFuncion;
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
@@ -1431,15 +1498,15 @@ function ConfirmacionPago($Paid, $now)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function TerminStop($stop, $datenow)
-{
-	global $con;
-		$updateSQL = sprintf("UPDATE term SET status=%s WHERE status=1 AND term_stop<%s",
-			$stop,
-			$datenow);
+// function TerminStop($stop, $datenow)
+// {
+// 	global $con;
+// 		$updateSQL = sprintf("UPDATE term SET status=%s WHERE status=1 AND term_stop<%s",
+// 			$stop,
+// 			$datenow);
   
-  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
-}
+//   $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -1904,47 +1971,47 @@ function statusInsc($statusInsc, $termSt)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function obtenerTerminActivo($terminActiv, $termStatus)
-{
-	global $con;
+// function obtenerTerminActivo($terminActiv, $termStatus)
+// {
+// 	global $con;
 	
-	$query_ConsultaFuncion = sprintf("SELECT * FROM term WHERE term_stop = %s AND status = %s ORDER BY id_term DESC ",
-		 GetSQLValueString($terminActiv, "text"),
-		 GetSQLValueString($termStatus, "int"));
-	//echo $query_ConsultaFuncion;
-	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
-	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
-	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+// 	$query_ConsultaFuncion = sprintf("SELECT * FROM term WHERE term_stop = %s AND status = %s ORDER BY id_term DESC ",
+// 		 GetSQLValueString($terminActiv, "text"),
+// 		 GetSQLValueString($termStatus, "int"));
+// 	//echo $query_ConsultaFuncion;
+// 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+// 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+// 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
-	if ($totalRows_ConsultaFuncion!=0) 
-		return true;
-	else return false;	
+// 	if ($totalRows_ConsultaFuncion!=0) 
+// 		return true;
+// 	else return false;	
 	
-	mysqli_free_result($ConsultaFuncion);
-}
+// 	mysqli_free_result($ConsultaFuncion);
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function terminCaducado($statusTerm)
-{
-	global $con;
+// function terminCaducado($statusTerm)
+// {
+// 	global $con;
 	
-	$query_ConsultaFuncion = sprintf("SELECT * FROM term WHERE status = %s ORDER BY id_term ASC ",
-		 GetSQLValueString($statusTerm, "int"));
-	//echo $query_ConsultaFuncion;
-	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
-	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
-	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+// 	$query_ConsultaFuncion = sprintf("SELECT * FROM term WHERE status = %s ORDER BY id_term ASC ",
+// 		 GetSQLValueString($statusTerm, "int"));
+// 	//echo $query_ConsultaFuncion;
+// 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+// 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+// 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
-	if ($totalRows_ConsultaFuncion!=0) 
-		return false;
-	else return true;	
+// 	if ($totalRows_ConsultaFuncion!=0) 
+// 		return false;
+// 	else return true;	
 	
-	mysqli_free_result($ConsultaFuncion);
-}
+// 	mysqli_free_result($ConsultaFuncion);
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,86 @@
 <style>
 
+@media only screen and (min-width: 320px) and (-webkit-device-pixel-ratio : 2) {
 
+}
+@media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) { 
+    .banner_wrapp {
+        height: 700px;
+        /* background-color: #00F; */
+        margin: 200px 0 0;
+    }
+    .product {
+        width: 100%;
+        height: 700px;
+        margin: 0px 0 0 0px;
+        /* background-color: #0FF; */
+    }
+    #slides {
+        position: relative;
+        height: 700px;
+        padding: 0px;
+        margin: 0px;
+        list-style-type: none;
+    }
+    .slide {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        /* z-index: 1; */
+        -webkit-transition: opacity 2s;
+        -moz-transition: opacity 2s;
+        -o-transition: opacity 2s;
+        transition: opacity 2s;
+    }
+    .showing {
+        opacity: 1;
+    }
+    .slide:nth-of-type(1) {
+        background-image: url("img/banners/Eriksberg_night.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /* -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        /* filter: grayscale(100%); */
+        /* -moz-filter: grayscale(100%); */
+        /* filter: brightness(80%);
+        -webkit-filter: brightness(80%);
+        -moz-filter: brightness(80%); */
+    }
+    .slide:nth-of-type(2) {
+        background-image: url("img/banners/citiesnew2.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /* -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        /* filter: grayscale(100%); */
+        /* -moz-filter: grayscale(100%); */
+        /* filter: brightness(80%);
+        -webkit-filter: brightness(80%);
+        -moz-filter: brightness(80%); */
+    }
+    .slider_text {
+        /* background-color: red; */
+        color: #dc202e;
+        font-size: 100px;
+        font-weight: 300;
+        text-transform: uppercase;
+        font-family: 'Anton', sans-serif;
+        /* font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; */
+        text-align: center;
+        text-shadow: 1px 1px 30px #000;
+        /* position: absolute;
+        top: 300px;
+        left: 150px; */
+        margin: 80px auto;
+    }
+    .slider_subtitle {
+        color:#FFF;
+        font-size: 70px;"
+    }
+}
+@media (min-width: 1024px) {
     .banner_wrapp {
         height: 700px;
         /* background-color: #00F; */
@@ -69,6 +149,11 @@
         top: 300px;
         left: 150px;
     }
+    .slider_subtitle {
+        color:#FFF;
+        font-size: 40px;"
+    }
+}
 </style>
 <div class="banner_wrapp">
     <div class="product">
@@ -76,7 +161,7 @@
             <li class="slide showing">
                 <div class="slider_text" style="filter: brightness(100%);">
                     Boka byggställning</br>
-                    <span style="color:#FFF; font-size: 40px;">enkel och snabb</span>
+                    <span class="slider_subtitle">enkel och snabb</span>
                     <span>
                         <form action="reserve.php" method="post" name="formrequest" id="formrequest">
                             
@@ -94,7 +179,7 @@
             <li class="slide">
                 <div class="slider_text" style="filter: brightness(100%);">
                     Boka byggställning</br>
-                    <span style="color:#FFF; font-size: 40px;">enkel och snabb</span>
+                    <span class="slider_subtitle">enkel och snabb</span>
                     <span>
                         <form action="reserve.php" method="post" name="formrequest" id="formrequest">
                             

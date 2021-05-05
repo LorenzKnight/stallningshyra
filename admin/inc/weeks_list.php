@@ -9,8 +9,8 @@
 <div class="search">
     <div class="<?php echo filters(UserAppearance($_SESSION['std_UserId']));?>">
         <form action="weeks.php" method="get" name="formsearch" id="formsearch">
-            <input class="textf" placeholder="sök" name="search" id="search" style="min-width:75%;"/>
-            <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Sök</button>
+            <input class="textf" placeholder="Name or Commentary..." name="search" id="search" style="min-width:75%;"/>
+            <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Search</button>
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
     </div>
@@ -42,18 +42,19 @@
         </form>
     </div>
     <div style="width:100px; text-align:center; color:#FFF; text-shadow: 0px 1px 15px rgba(58, 59, 69, 0.63); font-size:14px;">
-        <a style="margin: 0;" href="weeks.php"><button type="" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" value="">Rensa</button> </a><br/>
-        <?php echo $totalRows_DatosConsulta; ?> course(s)
+        <a style="margin: 0;" href="weeks.php"><button type="" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" value="">Clean</button> </a><br/>
+        <?php echo $totalRows_DatosConsulta; ?> week(s)
     </div>
 </div>
 <div class="<?php echo divWrapp(UserAppearance($_SESSION['std_UserId']));?>">
 <table width="100%" cellspacing="0" class="<?php echo appearanceList(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 20px auto 10px; ">
     <tr height="40">
         <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;">Name</td>
-        <td width="22.505%" nowrap="nowrap" align="left" style="padding: 0 0 0 0px;">Commentary</td>
-        <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">Extra price</td>
-        <td width="20.835%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">Status</td>
-        <td width="16.66%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">-</td>
+        <td width="17%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">Year</td>
+        <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 0px;">Commentary</td>
+        <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">Extra price</td>
+        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">Status</td>
+        <td width="16%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">-</td>
     </tr>
 </table>
 
@@ -63,7 +64,8 @@
 <table cellspacing="0" class="<?php echo appearanceLine(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 0 auto 15px;">
     <tr height="">
         <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo $row_DatosConsulta['week']; ?></td>
-        <td width="22.505%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">
+        <td width="17%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['year']; ?></td>
+        <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">
             <p><?php 
                 $texto= $row_DatosConsulta['commentary'];
                 if (strlen($texto) > 0) {
@@ -72,9 +74,9 @@
             ?></p>
             <?php } ?>
         </td>
-        <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['price']; ?> <?php if ($row_DatosConsulta['price'] != '') { ?>SEK Extra<?php } ?></td>
-        <td width="20.835%" nowrap="nowrap" align="center" style="color:<?php if($row_DatosConsulta['status'] == 1) { ?> green <?php } else { ?> red <?php } ?>; padding: 0 0 0 0;"><?php echo statusBinario($row_DatosConsulta['status']); ?></td>
-        <td width="16.66%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
+        <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['price']; ?> <?php if ($row_DatosConsulta['price'] != '') { ?>SEK Extra<?php } ?></td>
+        <td width="12%" nowrap="nowrap" align="center" style="color:<?php if($row_DatosConsulta['status'] == 1) { ?> green <?php } else { ?> red <?php } ?>; padding: 0 0 0 0;"><?php echo statusBinario($row_DatosConsulta['status']); ?></td>
+        <td width="16%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
         <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0007") || $_SESSION['std_Nivel'] < 2) : ?>
             <div class="arternative">
                 <button class="<?php echo artbtn(UserAppearance($_SESSION['std_UserId']));?>">o o o</button>

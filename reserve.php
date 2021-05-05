@@ -101,20 +101,20 @@
 <?php
     if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch")) {   
       if($_GET["city"] != "" && $_GET["product_type"] == ""){
-        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE city = %s AND status = 1 ORDER BY id_product ASC",
+        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE city = %s AND status = 1 ORDER BY city DESC",
                                         GetSQLValueString($_GET["city"], "int"));
       } else if ($_GET["product_type"] != "" && $_GET["city"] == "") {
-        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE product_type = %s AND status = 1 ORDER BY id_product ASC",
+        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE product_type = %s AND status = 1 ORDER BY city DESC",
                                         GetSQLValueString($_GET["product_type"], "int"));
       } else if ($_GET["city"] == "" && $_GET["product_type"] == "") {
-        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE status = 1 ORDER BY id_product ASC");
+        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE status = 1 ORDER BY city DESC");
       } else if ($_GET["city"] != "" && $_GET["product_type"] != "") {
-        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE product_type = %s AND city = %s AND status = 1 ORDER BY id_product ASC",
+        $query_DatosConsulta = sprintf("SELECT * FROM products WHERE product_type = %s AND city = %s AND status = 1 ORDER BY city DESC",
                                         GetSQLValueString($_GET["product_type"], "int"),
                                         GetSQLValueString($_GET["city"], "int"));
       }
     } else {
-      $query_DatosConsulta = sprintf("SELECT * FROM products WHERE status = 1 ORDER BY id_product ASC");
+      $query_DatosConsulta = sprintf("SELECT * FROM products WHERE status = 1 ORDER BY city DESC");
     }
       $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
       $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);

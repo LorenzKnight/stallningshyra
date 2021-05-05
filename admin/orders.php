@@ -1,6 +1,20 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
+<?php
+  $currentYear = date('Y');
+  $nextYear = strtotime ('+1 year' , strtotime($currentYear));
+  $nextYear = date ('Y',$nextYear);
 
+  if ($_GET["updateweeks"] == "" && date('Y-m-d') == $currentYear.'-05-05') {
+
+    $insertGoTo = "weeks.php?updateweeks=1";
+    if (isset($_SERVER['QUERY_STRING'])) {
+      $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+      $insertGoTo .= $_SERVER['QUERY_STRING'];
+    }
+    header(sprintf("Location: %s", $insertGoTo));
+  }
+?>
 <?php
   if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch"))
   { 
