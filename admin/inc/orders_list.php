@@ -4,7 +4,7 @@
         <form action="orders.php" method="get" name="formsearch" id="formsearch">
             <input class="textf" placeholder="Search by name or surname..." name="search" id="search" style="min-width:75%;" />
             <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Sök</button>
-            <?php echo $currentYear.'-12-22'; ?> <?php echo date('Y-m-d'); ?> 
+            <?php //echo $currentYear.'-12-22'; ?> <?php //echo date('Y-m-d'); ?> 
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
     </div>

@@ -1,13 +1,21 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
+
 <?php
   $currentYear = date('Y');
-  $nextYear = strtotime ('+1 year' , strtotime($currentYear));
+  $nextYear = strtotime ('+2 year' , strtotime($currentYear));
   $nextYear = date ('Y',$nextYear);
-
-  if ($_GET["updateweeks"] == "" && date('Y-m-d') == $currentYear.'-05-05') {
-
-    $insertGoTo = "weeks.php?updateweeks=1";
+?>
+<?php
+  $query_DatosInsert = sprintf("SELECT * FROM weeks WHERE year = $nextYear ORDER BY year DESC"); 
+  $DatosInsert = mysqli_query($con, $query_DatosInsert) or die(mysqli_error($con));
+  $row_DatosInsert = mysqli_fetch_assoc($DatosInsert);
+  $totalRows_DatosInsert = mysqli_num_rows($DatosInsert);
+?>
+<?php
+  if (($_GET["updateweeks"] == "") && (date('Y-m-d') >= $currentYear.'-12-23') && ($totalRows_DatosInsert == 0))
+  {
+    $insertGoTo = "weeks.php?insertweeks=1";
     if (isset($_SERVER['QUERY_STRING'])) {
       $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
       $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -57,54 +65,63 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   if (comprobaremailcliente($_POST["email"])) 
   {
     
-  $year = date("Y");
-  $month = date("m");
-  $day = date("d");
-  $insertSQL = sprintf("INSERT INTO clients(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, agree, status, via) 
-                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                        GetSQLValueString($_POST["name"], "text"),                      
-                        GetSQLValueString($_POST["surname"], "text"),
-                        GetSQLValueString($_POST["email"], "text"),
-                        GetSQLValueString($_POST["password"], "text"),
-                        GetSQLValueString($_POST["personal_number"], "text"),
-                        GetSQLValueString($_POST["telephone"], "text"),
-                        GetSQLValueString($_POST["adress"], "text"),
-                        GetSQLValueString($_POST["post"], "int"),
-                        GetSQLValueString($_POST["city"], "text"),
-                        GetSQLValueString($_POST["agree"], "text"),
-                        GetSQLValueString($_POST["status"], "text"),
-                        GetSQLValueString($_POST["via"], "int"));
+    $year = date("Y");
+    $month = date("m");
+    $day = date("d");
+    $insertSQL = sprintf("INSERT INTO clients(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, agree, client_no, status, via) 
+                          VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                          GetSQLValueString($_POST["name"], "text"),                      
+                          GetSQLValueString($_POST["surname"], "text"),
+                          GetSQLValueString($_POST["email"], "text"),
+                          GetSQLValueString($_POST["password"], "text"),
+                          GetSQLValueString($_POST["personal_number"], "text"),
+                          GetSQLValueString($_POST["telephone"], "text"),
+                          GetSQLValueString($_POST["adress"], "text"),
+                          GetSQLValueString($_POST["post"], "int"),
+                          GetSQLValueString($_POST["city"], "text"),
+                          GetSQLValueString($_POST["agree"], "text"),
+                          GetSQLValueString($_POST["client_no"], "text"),
+                          GetSQLValueString($_POST["status"], "text"),
+                          GetSQLValueString($_POST["via"], "int"));
 
-  
-  $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
-  
-  
-  $insertGoTo1 = "orders.php?newcompl=1";
-  if (isset($_SERVER['QUERY_STRING'])) {
-    $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
-    $insertGoTo1 .= $_SERVER['QUERY_STRING'];
-  }
-  header(sprintf("Location: %s", $insertGoTo1));
-}
+    $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
 
-else {
 
-  $query_DatosIdentidad = sprintf("SELECT * FROM clients WHERE email=%s ORDER BY id_client DESC",
-                              GetSQLValueString($_POST["email"], "text")); 
-  $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
-  $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
-  $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
-  
-  $StEmail = $row_DatosIdentidad["id_client"];
-  $insertGoTo1 = "orders.php?newcompl=$StEmail";
-  header(sprintf("Location: %s", $insertGoTo1));
+
+    $query_DatosIdentidad = sprintf("SELECT * FROM clients WHERE email=%s ORDER BY id_client DESC",
+                                    GetSQLValueString($_POST["email"], "text")); 
+    $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
+    $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
+    $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
+
+    
+    
+    $StEmail = $row_DatosIdentidad["id_client"];
+    $insertGoTo1 = "orders.php?newcompl=$StEmail";
+    if (isset($_SERVER['QUERY_STRING'])) {
+      $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
+      $insertGoTo1 .= $_SERVER['QUERY_STRING'];
+    }
+    header(sprintf("Location: %s", $insertGoTo1));
+
+  } else {
+
+    $query_DatosIdentidad = sprintf("SELECT * FROM clients WHERE email=%s ORDER BY id_client DESC",
+                                    GetSQLValueString($_POST["email"], "text")); 
+    $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
+    $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
+    $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
+    
+    $StEmail = $row_DatosIdentidad["id_client"];
+    $insertGoTo1 = "orders.php?newcompl=$StEmail";
+    header(sprintf("Location: %s", $insertGoTo1));
  }
 }
 ?>
 
 <?php
-  $query_DatosInsc = sprintf("SELECT * FROM clients WHERE via=%s ORDER BY id_client DESC",
-                              GetSQLValueString($_SESSION['std_UserId'], "int")); 
+  $query_DatosInsc = sprintf("SELECT * FROM clients WHERE id_client=%s ORDER BY id_client DESC",
+                              GetSQLValueString($_GET['recibo'], "int")); 
   $DatosInsc = mysqli_query($con, $query_DatosInsc) or die(mysqli_error($con));
   $row_DatosInsc = mysqli_fetch_assoc($DatosInsc);
   $totalRows_DatosInsc = mysqli_num_rows($DatosInsc);
@@ -119,8 +136,17 @@ else {
   $totalRows_DatosProduct = mysqli_num_rows($DatosProduct);
 ?>
 <?php
+  if ($_GET['newcompl2'] != "") {
+    $clienteInsert = $_GET['newcompl2'];
+  } else if ($_GET['recibo'] != ""){
+    $clienteInsert = $_GET['recibo'];
+  } else {
+    $clienteInsert = $_GET['id_client'];
+  }
+  ?>
+  <?php
   $query_DatosProductSeleted = sprintf("SELECT * FROM product_selected WHERE id_client = %s AND status = 1 ORDER BY id_selected DESC",
-                                        GetSQLValueString($cliente, "int")); 
+                                        GetSQLValueString($clienteInsert, "int")); 
   $DatosProductSeleted = mysqli_query($con, $query_DatosProductSeleted) or die(mysqli_error($con));
   $row_DatosProductSeleted = mysqli_fetch_assoc($DatosProductSeleted);
   $totalRows_DatosProductSeleted = mysqli_num_rows($DatosProductSeleted);
@@ -147,7 +173,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formweeks")) {
 
                         $insertSQL = sprintf("INSERT INTO cart(id_client, id_product, id_week, date)
                                                 VALUES (%s, %s, %s, NOW())",
-                                                GetSQLValueString($cliente, "int"),
+                                                GetSQLValueString($_POST["id_client"], "int"),
                                                 GetSQLValueString($_POST["id_product"], "int"),                   
                                                 GetSQLValueString($value, "int"));
 
@@ -155,12 +181,12 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formweeks")) {
 
 
                           $updateSQL = sprintf("UPDATE product_selected SET confirmed = 1 WHERE id_client=%s AND confirmed IS NULL",
-                                                GetSQLValueString($cliente, "int"));
+                                                GetSQLValueString($_POST["id_client"], "int"));
                                     
                           $Result2 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 
-
-                        $insertGoTo = "orders.php?recibo=1";
+                        $client = $_POST["id_client"];
+                        $insertGoTo = "orders.php?recibo=$client";
                         if (isset($_SERVER['QUERY_STRING'])) {
                             $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
                             $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -192,7 +218,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formweeks")) {
 ?>
 <?php
     $query_DatosCart2 = sprintf("SELECT * FROM cart WHERE id_client = %s AND transaction_made = 0 ORDER BY id_counter ASC",
-                                GetSQLValueString($cliente, "int")); 
+                                GetSQLValueString($clienteInsert, "int")); 
     $DatosCart2 = mysqli_query($con, $query_DatosCart2) or die(mysqli_error($con));
     $row_DatosCart2 = mysqli_fetch_assoc($DatosCart2);
     $totalRows_DatosCart2 = mysqli_num_rows($DatosCart2);

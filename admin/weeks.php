@@ -1,5 +1,6 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
+<?php $anoActual = date('Y'); ?>
 <?php
   $query_DatosWeeks_filter = sprintf("SELECT * FROM weeks ORDER BY id_week DESC"); 
   $DatosWeeks_filter = mysqli_query($con, $query_DatosWeeks_filter) or die(mysqli_error($con));
@@ -18,8 +19,8 @@
       $extramodelo.=" OR week LIKE '%".$porciones[$i] ."%'";
     }
     //FIN BLOQUE BUSCADOR INTELIGENTE NOMBRE
-
-    $query_DatosConsulta = "SELECT * FROM weeks WHERE ".$extramodelo." AND status = 1 ORDER BY id_week ASC";
+  
+    $query_DatosConsulta = "SELECT * FROM weeks WHERE ".$extramodelo." AND year >= $anoActual AND status = 1 ORDER BY id_week ASC";
     //echo $query_DatosConsulta;
 
 
@@ -38,13 +39,60 @@
   }
   else
   {
-    $query_DatosConsulta = sprintf("SELECT * FROM weeks ORDER BY id_week ASC");
+    $query_DatosConsulta = sprintf("SELECT * FROM weeks WHERE year >= $anoActual ORDER BY id_week ASC");
   }
     $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
     $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
     $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
+<?php
+    $currentYear2 = date('Y');
+    $nextYear2 = strtotime ('+1 year' , strtotime($currentYear2));
+    $nextYear2 = date ('Y',$nextYear2);
+
+    // $nextYear3 = strtotime ('+2 year' , strtotime($currentYear2));
+    // $nextYear3 = date ('Y',$nextYear3);
+?>
+<?php
+  $query_DatosInsert = sprintf("SELECT * FROM weeks WHERE year = $nextYear2 ORDER BY year DESC"); 
+  $DatosInsert = mysqli_query($con, $query_DatosInsert) or die(mysqli_error($con));
+  $row_DatosInsert = mysqli_fetch_assoc($DatosInsert);
+  $totalRows_DatosInsert = mysqli_num_rows($DatosInsert);
+?>
+<?php
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+} 
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "forminsertweeks")) {
+
+    if(is_array($_POST['week_no'])) {
+
+        // realizamos el ciclo de los checkbox selccionados
+        while(list($key,$weekno) = each($_POST['week_no'])) {
+            $week = 'vecka '.$weekno;
+
+            $insertSQL = sprintf("INSERT INTO weeks(week_no, week, year, status)
+                                    VALUES (%s, %s, %s, %s)",
+                                    GetSQLValueString($weekno, "int"),
+                                    GetSQLValueString($week, "text"),
+                                    GetSQLValueString($_POST["year"], "int"),
+                                    GetSQLValueString($_POST['status'], "int"));
+
+            $Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
+
+            $insertGoTo = "weeks.php";
+            if (isset($_SERVER['QUERY_STRING'])) {
+                $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+                $insertGoTo .= $_SERVER['QUERY_STRING'];
+            }
+            header(sprintf("Location: %s", $insertGoTo));
+        }
+    }
+}
+?>
+
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {

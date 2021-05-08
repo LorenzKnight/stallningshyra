@@ -515,6 +515,7 @@ function SemanasParaMail($clientSem, $prod)
 	global $con;
 	
 	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_client=%s AND id_product=%s AND discountcode IS NULL AND transaction_made!=0 ORDER BY id_counter ASC",
+	// $query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_client=%s AND discountcode IS NULL AND transaction_made!=0 ORDER BY id_counter ASC",
 										GetSQLValueString($clientSem, "int"),
 										GetSQLValueString($prod, "int"));
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
@@ -522,7 +523,7 @@ function SemanasParaMail($clientSem, $prod)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 
 	?>
-			<div style="width:680px; margin-top:230px; position:absolute;">
+			<div style="width:680px; margin-top:200px; position:absolute;">
 	<?php
 			if ($totalRows_ConsultaFuncion > 0) { 
 				do { 
@@ -535,13 +536,16 @@ function SemanasParaMail($clientSem, $prod)
 						<td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
 							
 						</td>
-						<td colspan="1" width="15%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+						<td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
 							
 						</td>
-						<td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+						<td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px; padding-right:15px;">
 							<?php echo ObtenerNombreSemana($row_ConsultaFuncion['id_week']); ?>
 						</td>
-						<td colspan="1" width="20%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+						<td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+							<?php echo ObtenerAnoSemana($row_ConsultaFuncion['id_week']); ?>
+						</td>
+						<td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
 							<?php echo $priceWeek2; ?> SEK
 						</td>
 					</tr>
@@ -934,7 +938,7 @@ $mensaje.='</body>
 	
 	// Enviarlo
 	mail($destinatario, $asunto, $mensaje, $cabeceras);
-	//echo $mensaje;
+	echo $mensaje;
 	
 }
 
@@ -1209,6 +1213,27 @@ function ObtenerApellidoCliente($apellidoC)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
 	return $row_ConsultaFuncion["surname"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerNumeroCliente($clientNo)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT client_no FROM clients WHERE id_client = %s ",
+		 GetSQLValueString($clientNo, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["client_no"];	
 	
 	mysqli_free_result($ConsultaFuncion);
 }
@@ -1772,12 +1797,12 @@ function ActualizacionCarrito($Inscription, $cliente)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $status, $payment, $TotalSinImpuest, $total)
+function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, status, payment, subtotal, total) 
-									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, total) 
+									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "text"),
 									 GetSQLValueString($dia, "text"),
@@ -1785,6 +1810,7 @@ function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $status, $paymen
 									 GetSQLValueString(ObtenerNombreCliente($cliente), "text"),
 									 GetSQLValueString(ObtenerApellidoCliente($cliente), "text"),
 									 GetSQLValueString($product, "int"),
+									 GetSQLValueString($orderno, "text"),
 									 GetSQLValueString($status, "int"),
 									 GetSQLValueString($payment, "int"),
 									 GetSQLValueString($TotalSinImpuest, "text"),
@@ -1835,12 +1861,12 @@ function ActualizacionCarrito2($Inscription2, $clientadmin)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $status, $payment, $TotalSinImpuest, $total)
+function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, status, payment, subtotal, total) 
-									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, total) 
+									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "text"),
 									 GetSQLValueString($dia, "text"),
@@ -1848,6 +1874,7 @@ function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $status, $paymen
 									 GetSQLValueString(ObtenerNombreCliente($cliente), "text"),
 									 GetSQLValueString(ObtenerApellidoCliente($cliente), "text"),
 									 GetSQLValueString($product, "int"),
+									 GetSQLValueString($orderno, "text"),
 									 GetSQLValueString($status, "int"),
 									 GetSQLValueString($payment, "int"),
 									 GetSQLValueString($TotalSinImpuest, "text"),

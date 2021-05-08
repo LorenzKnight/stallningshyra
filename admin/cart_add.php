@@ -1,7 +1,7 @@
 <?php require_once('../connections/conexion.php');?>
 <?php
  $query_DatosInsc = sprintf("SELECT * FROM clients WHERE via=%s ORDER BY id_client DESC",
-                            GetSQLValueString($_SESSION['std_UserId'], "int")); 
+                            GetSQLValueString($_GET['newcompl'], "int")); 
  $DatosInsc = mysqli_query($con, $query_DatosInsc) or die(mysqli_error($con));
  $row_DatosInsc = mysqli_fetch_assoc($DatosInsc);
  $totalRows_DatosInsc = mysqli_num_rows($DatosInsc);
@@ -17,14 +17,14 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $insertSQL = sprintf("INSERT INTO product_selected(date, year, month, day, time, product, id_client) 
                         VALUES (NOW(), $year, $month, $day, NOW(), %s, %s)",                    
                         GetSQLValueString($_GET["productID"], "int"),
-                        GetSQLValueString($row_DatosInsc['id_client'], "int"));
+                        GetSQLValueString($_GET['newcompl2'], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
   
-  
+  $client = $_GET['newcompl'];
   // $insertGoTo1 = $_SERVER["HTTP_REFERER"];
-  $insertGoTo1 = "orders.php?newcompl2=1";
+  $insertGoTo1 = "orders.php?newcompl2=$client";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
     $insertGoTo1 .= $_SERVER['QUERY_STRING'];

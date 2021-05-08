@@ -67,7 +67,7 @@
 
         if (comprobaremailcliente($_POST["email"])) {
         
-            $updateSQL = sprintf("UPDATE clients SET name=%s, surname=%s, email=%s, personal_number=%s, telephone=%s, adress=%s, post=%s, city=%s, agree=%s, status=%s, via=%s WHERE id_client=%s",
+            $updateSQL = sprintf("UPDATE clients SET name=%s, surname=%s, email=%s, personal_number=%s, telephone=%s, adress=%s, post=%s, city=%s, agree=%s, client_no=%s, status=%s, via=%s WHERE id_client=%s",
                             GetSQLValueString($_POST["name"], "text"),
                             GetSQLValueString($_POST["surname"], "text"),
                             GetSQLValueString($_POST["email"], "text"),
@@ -77,6 +77,7 @@
                             GetSQLValueString($_POST["post"], "int"),
                             GetSQLValueString($_POST["city"], "text"),
                             GetSQLValueString($_POST["agree"], "text"),
+                            GetSQLValueString($_POST["client_no"], "text"),
                             GetSQLValueString($_POST["status"], "text"),
                             GetSQLValueString($_POST["via"], "int"),
                             GetSQLValueString($_POST["id_client"], "int"));

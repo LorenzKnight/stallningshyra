@@ -6,8 +6,8 @@
                         <td colspan="2" valign="middle" align="left" style="font-size: 20px;">
                             Offert
                         </td>
-                        <td colspan="2" valign="middle" align="right" style="padding: 0 0;">
-                            <a href="index.php"><img src="img/sys/stallningshyra.svg" width="100%" height="" style="margin:;"></a>
+                        <td colspan="3" valign="middle" align="right" style="padding: 0 0;">
+                            <a href="index.php"><img src="img/sys/stallningshyra.svg" width="70%" height="" style="margin:;"></a>
                         </td>
                     </tr>
                     <tr height="40">
@@ -26,13 +26,16 @@
                         <td colspan="1" width="40%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
                             Ställningsvagn:
                         </td>
-                        <td colspan="1" width="15%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
+                        <td colspan="1" width="8%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
                             -
                         </td>
-                        <td colspan="1" width="25%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
+                        <td colspan="1" width="25%" valign="middle" align="right" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
                             Vecka(or):
                         </td>
-                        <td colspan="1" width="20%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
+                        <td colspan="1" width="7%" valign="middle" align="left" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
+                            
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="center" style="font-size: 14px; font-weight: 600; border-bottom:1px solid #666;">
                             Pris:
                         </td>
                     </tr>
@@ -40,13 +43,16 @@
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             <?php echo ObtenerNombreProducto($row_DatosProductSeleted['product']);?>
                         </td>
-                        <td colspan="1" width="15%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
                         <td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                            
                         </td>
-                        <td colspan="1" width="20%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="7%" valign="middle" align="center" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             
                         </td>
                     </tr>
@@ -63,13 +69,16 @@
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="15%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px; padding-right:15px;">
                             <?php echo ObtenerNombreSemana($row_DatosCart2['id_week']); ?>
                         </td>
-                        <td colspan="1" width="20%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            <?php echo ObtenerAnoSemana($row_DatosCart2['id_week']); ?>
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             <?php echo $priceWeek2; ?> SEK
                         </td>
                     </tr>
@@ -85,13 +94,16 @@
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="15%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             Sub-total:
                         </td>
-                        <td colspan="1" width="20%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             <?php echo $TotalSinImpuest2; ?> SEK
                         </td>
                     </tr>
@@ -104,13 +116,16 @@
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="15%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
                         </td>
-                        <td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             Moms:
                         </td>
-                        <td colspan="1" width="20%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             <?php echo $moms2; ?> SEK
                         </td>
                     </tr>
@@ -118,12 +133,12 @@
                         <td colspan="2" valign="middle" align="left" style="font-size: 18px; border-top:1px solid #F00;">
                             Total
                         </td>
-                        <td colspan="2" valign="middle" align="right" style="font-size: 18px; border-top:1px solid #F00;">
+                        <td colspan="3" valign="middle" align="right" style="font-size: 18px; border-top:1px solid #F00;">
                             <?php echo $total2; ?> SEK
                         </td>
                     </tr>
                     <tr height="30">
-                        <td colspan="4" valign="middle" align="center" style="font-size: 12px;">
+                        <td colspan="5" valign="middle" align="center" style="font-size: 12px;">
                         
                         </td>
                     </tr>
