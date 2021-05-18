@@ -217,21 +217,13 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formweeks")) {
     // $totalRows_DatosCart = mysqli_num_rows($DatosCart);
 ?>
 <?php
-    $query_DatosCart2 = sprintf("SELECT * FROM cart WHERE id_client = %s AND transaction_made = 0 ORDER BY id_counter ASC",
+    $query_DatosCarts = sprintf("SELECT * FROM cart WHERE id_client = %s AND transaction_made = 0 ORDER BY id_counter ASC",
                                 GetSQLValueString($clienteInsert, "int")); 
-    $DatosCart2 = mysqli_query($con, $query_DatosCart2) or die(mysqli_error($con));
-    $row_DatosCart2 = mysqli_fetch_assoc($DatosCart2);
-    $totalRows_DatosCart2 = mysqli_num_rows($DatosCart2);
+    $DatosCarts = mysqli_query($con, $query_DatosCarts) or die(mysqli_error($con));
+    $row_DatosCarts = mysqli_fetch_assoc($DatosCarts);
+    $totalRows_DatosCarts = mysqli_num_rows($DatosCarts);
 ?>
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<?php
-  // $query_DatosCart2 = sprintf("SELECT * FROM cart WHERE id_client=%s AND transaction_made = 0 ORDER BY id_counter ASC",
-  //                             GetSQLValueString($_GET['id'], "int")); 
-  // $DatosCart2 = mysqli_query($con, $query_DatosCart2) or die(mysqli_error($con));
-  // $row_DatosCart2 = mysqli_fetch_assoc($DatosCart2);
-  // $totalRows_DatosCart2 = mysqli_num_rows($DatosCart2);
-?>
 <!-- /////////////////////////////////// Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
 <?php
   // $query_DatosParaPaquete = sprintf("SELECT * FROM cart WHERE id_client = %s AND transaction_made = 0 ORDER BY id_counter ASC",

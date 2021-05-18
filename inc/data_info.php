@@ -7,12 +7,12 @@
 <div class="over_c">
     <div class="over_ct">
         <div class="v_centrado">
-            <?php echo $row_DatosInfo['name']; ?>
+            <h3 class="product_title"><?php echo $row_DatosInfo['name']; ?></h3>
         </div>
     </div>
     <div class="over_cc">
         <div class="v_centrado">
-            <?php echo $row_DatosInfo['resumen']; ?>
+            <p class="texto_original"><?php echo $row_DatosInfo['resumen']; ?></p>
         </div>
     </div>
 </div>

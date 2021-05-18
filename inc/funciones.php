@@ -523,40 +523,38 @@ function SemanasParaMail($clientSem, $prod)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 
 	?>
-			<div style="width:680px; margin-top:200px; position:absolute;">
+	<div style="width:680px; margin-top:200px; position:absolute;">
 	<?php
-			if ($totalRows_ConsultaFuncion > 0) { 
-				do { 
+		if ($totalRows_ConsultaFuncion > 0) { 
+			do { 
 
-			$priceWeek2 = ObtenerPrecioSemana($row_ConsultaFuncion['id_week']) + ObtenerPrecioProducto($prod);
-			?> 
-			
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr height="20">
-						<td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
-							
-						</td>
-						<td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
-							
-						</td>
-						<td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px; padding-right:15px;">
-							<?php echo ObtenerNombreSemana($row_ConsultaFuncion['id_week']); ?>
-						</td>
-						<td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
-							<?php echo ObtenerAnoSemana($row_ConsultaFuncion['id_week']); ?>
-						</td>
-						<td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
-							<?php echo $priceWeek2; ?> SEK
-						</td>
-					</tr>
-				</table>
-			<?php $TotalSinImpuest2 = $TotalSinImpuest2 + $priceWeek2; ?>
-			<?php
-				} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
-			}
-			?>
-			
-			</div>
+		$priceWeek2 = ObtenerPrecioSemana($row_ConsultaFuncion['id_week']) + ObtenerPrecioProducto($prod);
+	?> 	
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr height="20">
+				<td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+					
+				</td>
+				<td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+					
+				</td>
+				<td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px; padding-right:15px;">
+					<?php echo ObtenerNombreSemana($row_ConsultaFuncion['id_week']); ?>
+				</td>
+				<td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+					<?php echo ObtenerAnoSemana($row_ConsultaFuncion['id_week']); ?>
+				</td>
+				<td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+					<?php echo $priceWeek2; ?> SEK
+				</td>
+			</tr>
+		</table>
+	<?php $TotalSinImpuest2 = $TotalSinImpuest2 + $priceWeek2; ?>
+	<?php
+		} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
+	}
+	?>
+	</div>
 			<?php
 		 
 	mysqli_free_result($ConsultaFuncion);
@@ -920,7 +918,7 @@ function SendMailHtml($destinatario, $contenido, $asunto)
 {
 	$mensaje = '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Documento sin título</title>
 </head>
 
@@ -931,7 +929,7 @@ $mensaje.='</body>
 
 	// Para enviar correo HTML, la cabecera Content-type debe definirse
 	$cabeceras  = 'MIME-Version: 1.0' . "\n";
-	$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\n";
+	$cabeceras .= 'Content-type: text/html; charset=utf-8' . "\n";
 	// Cabeceras adicionales
 	$cabeceras .= 'From: info@stallningshyra.se' . "\n";
 	$cabeceras .= 'Bcc: info@stallningshyra.se' . "\n";
@@ -1797,12 +1795,12 @@ function ActualizacionCarrito($Inscription, $cliente)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total)
+function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $preciorebaja, $total)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, total) 
-									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, pdiscount, total) 
+									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "text"),
 									 GetSQLValueString($dia, "text"),
@@ -1814,6 +1812,7 @@ function ConfirmationPago($ano, $mes, $dia, $cliente, $product, $orderno, $statu
 									 GetSQLValueString($status, "int"),
 									 GetSQLValueString($payment, "int"),
 									 GetSQLValueString($TotalSinImpuest, "text"),
+									 GetSQLValueString($preciorebaja, "text"),
 									 GetSQLValueString($total, "text"));
 	//echo $insertSQL;
 	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
@@ -1861,12 +1860,12 @@ function ActualizacionCarrito2($Inscription2, $clientadmin)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total)
+function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $paqueterebaja, $total)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, total) 
-									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_client, name, surname, id_product, order_number, status, payment, subtotal, pdiscount, total) 
+									VALUES (NOW(), %s, %s, %s, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "text"),
 									 GetSQLValueString($dia, "text"),
@@ -1878,6 +1877,7 @@ function ConfirmationDone($ano, $mes, $dia, $cliente, $product, $orderno, $statu
 									 GetSQLValueString($status, "int"),
 									 GetSQLValueString($payment, "int"),
 									 GetSQLValueString($TotalSinImpuest, "text"),
+									 GetSQLValueString($paqueterebaja, "text"),
 									 GetSQLValueString($total, "text"));
 	//echo $insertSQL;
 	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));

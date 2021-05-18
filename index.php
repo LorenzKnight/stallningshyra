@@ -16,7 +16,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 <meta name="Loops-Dance-studio" content="Loops Dance studio är en dansskola i Göteborg med fokus på Urban Kizomba men med hjärta för fler olika pardanser och dansstilar.">
 <meta name="Dans" content="Loops Dance studio är en dansskola i Göteborg med fokus på Urban Kizomba men med hjärta för fler olika pardanser och dansstilar.">
 <meta name="Kizomba" content="Loops Dance studio är en dansskola i Göteborg med fokus på Urban Kizomba men med hjärta för fler olika pardanser och dansstilar.">
@@ -36,7 +36,7 @@
         <?php include("inc/banner.php"); ?>
         <?php include("inc/data_info.php"); ?>
         <?php include("inc/wrapp.php"); ?>
-        <?php include("inc/ig_wrapp.php"); ?>
+        <?php //include("inc/ig_wrapp.php"); ?>
         <?php include("inc/foot.php"); ?>
     </div>
 </body>

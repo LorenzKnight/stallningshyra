@@ -2552,10 +2552,10 @@
                 <div style="width:100%; height:200px;">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">                    
                     <?php
-                        if ($totalRows_DatosCart2 > 0) {
+                        if ($totalRows_DatosCarts > 0) {
                         do { ?>
                             <?php
-                                $priceWeek2 = ObtenerPrecioSemana($row_DatosCart2['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
+                                $priceWeek2 = ObtenerPrecioSemana($row_DatosCarts['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
                             ?>
                     <tr height="20">
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
@@ -2565,17 +2565,17 @@
                             
                         </td>
                         <td colspan="1" width="25%" valign="middle" align="left" style="color: #666; font-size: 14px; padding-left:35px;">
-                            <?php echo ObtenerNombreSemana($row_DatosCart2['id_week']); ?>
+                            <?php echo ObtenerNombreSemana($row_DatosCarts['id_week']); ?>
                         </td>
                         <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
-                            <?php echo ObtenerAnoSemana($row_DatosCart2['id_week']); ?>
+                            <?php echo ObtenerAnoSemana($row_DatosCarts['id_week']); ?>
                         </td>
                         <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                             <?php echo $priceWeek2; ?> SEK
                         </td>
                     </tr>
                     <?php $TotalSinImpuest2 = $TotalSinImpuest2 + $priceWeek2; ?>
-                    <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
+                    <?php } while ($row_DatosCarts = mysqli_fetch_assoc($DatosCarts));
                         }
                         ?>
                 </table>
@@ -2600,10 +2600,32 @@
                         </td>
                     </tr>
                     <?php
-                        $tax2 = $row_DatosTaxes['percent'];
-                        $moms2 = $TotalSinImpuest2 * $tax2 / 100;
-                        $total2 = $moms2 + $TotalSinImpuest2;
+                        $resprosent = ObtenerPDescuento($totalRows_DatosCarts);
+                        $paqueterebaja = $TotalSinImpuest2 * $resprosent / 100;
+
+                        $subTotal = $TotalSinImpuest2 - $paqueterebaja;
+
+                        $tax = $row_DatosTaxes['percent'];
+                        $moms = $subTotal / 100 * $tax;
+                        $total = $moms + $subTotal;
                     ?>
+                    <tr height="30">
+                        <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+                            Mängd rabatt:
+                        </td>
+                        <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                            
+                        </td>
+                        <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+                            <?php echo $paqueterebaja; ?> SEK
+                        </td>
+                    </tr>
                     <tr height="30">
                         <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                             
@@ -2618,7 +2640,7 @@
                             
                         </td>
                         <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
-                            <?php echo $moms2; ?> SEK
+                            <?php echo $moms; ?> SEK
                         </td>
                     </tr>
                     <tr height="30">
@@ -2626,7 +2648,7 @@
                             Total
                         </td>
                         <td colspan="3" valign="middle" align="right" style="font-size: 18px; border-top:1px solid #F00;">
-                            <?php echo $total2; ?> SEK
+                            <?php echo $total; ?> SEK
                         </td>
                     </tr>
                     <tr height="30">
@@ -2656,17 +2678,27 @@
 
 <?php if($_GET['payment'] == 1): ?>
     <?php
-        if ($totalRows_DatosCart2 > 0) {
+        if ($totalRows_DatosCarts > 0) {
             do { 
-                $priceWeek = ObtenerPrecioSemana($row_DatosCart2['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
+                $priceWeek = ObtenerPrecioSemana($row_DatosCarts['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
                 $TotalSinImpuest = $TotalSinImpuest + $priceWeek; 
-            } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
+            } while ($row_DatosCarts = mysqli_fetch_assoc($DatosCarts));
         }
     ?>
     <?php
+        $resprosent = ObtenerPDescuento($totalRows_DatosCarts);
+        $paqueterebaja = $TotalSinImpuest * $resprosent / 100;
+
+        $subTotal = $TotalSinImpuest - $paqueterebaja;
+
         $tax = $row_DatosTaxes['percent'];
-        $moms = $TotalSinImpuest * $tax / 100;
-        $total = $moms + $TotalSinImpuest;
+        $moms = $subTotal / 100 * $tax;
+        $total = $moms + $subTotal;
+    ?>
+    <?php
+        // $tax = $row_DatosTaxes['percent'];
+        // $moms = $TotalSinImpuest * $tax / 100;
+        // $total = $moms + $TotalSinImpuest;
         
         $cliente = $_GET['id_client'];
         $product = $row_DatosProductSeleted['product'];
@@ -2674,7 +2706,7 @@
         $status = 2;
         $payment = $_GET['payment'];
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $paqueterebaja, $total); ?>
 <div class="subform_cont1">
     <div class="msn_done">
         <br/><br/><br/><br/>
@@ -2784,27 +2816,27 @@
                                     <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
                                     }
                                     ?>
-                                        <?php if ($totalRows_DatosCart2 > 0) {?>
+                                        <?php if ($totalRows_DatosCarts > 0) {?>
                                         <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
                                         <?php } ?>
                                     <?php
-                                    if ($totalRows_DatosCart2 > 0) {
+                                    if ($totalRows_DatosCarts > 0) {
                                     do { ?>
                                         <div style="width:100%;">
-                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart2['id_counter'];?>">
+                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCarts['id_counter'];?>">
                                                 <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerNombreCurso($row_DatosCart2['id_course']);?>
+                                                    <?php echo ObtenerNombreCurso($row_DatosCarts['id_course']);?>
                                                 </div>
                                                 <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart2['id_course']);?>
+                                                    <?php echo ObtenerEsquemaCurso($row_DatosCarts['id_course']);?>
                                                 </div>
                                                 <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
                                                     ( - )
                                                 </div>
                                             </a>
                                         </div>
-                                    <?php $NoDiscTotal2 = $NoDiscTotal2 + ObtenerPrecioCurso($row_DatosCart2['id_course']);?>
-                                    <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
+                                    <?php $NoDiscTotal2 = $NoDiscTotal2 + ObtenerPrecioCurso($row_DatosCarts['id_course']);?>
+                                    <?php } while ($row_DatosCarts = mysqli_fetch_assoc($DatosCarts));
                                     }
                                     ?>
                                 </div>
@@ -2842,7 +2874,7 @@
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
                                         <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR2; ?> SEK</td>
                                     </tr> -->
-                                    <?php if ($totalRows_DatosCart2 > 0) {?>
+                                    <?php if ($totalRows_DatosCarts > 0) {?>
                                     <!-- <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
                                         <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal2; ?> SEK</td>
@@ -2992,11 +3024,24 @@
                 </td>
             </tr>
             <?php
-                $percent = $row_DatosImpuesto['percent'];
-                $moms = $row_DatosSee['subtotal'] * $percent / 100;
+                $resprosent = ObtenerPDescuento($totalRows_DatosPackage);
+                $preciorebaja = $row_DatosSee['subtotal'] / 100 * $resprosent;
 
-                $total = $row_DatosSee['subtotal'] + $moms
-            ?> 
+                $subTotal = $row_DatosSee['subtotal'] - $preciorebaja;
+
+                $percent = $row_DatosImpuesto['percent'];
+                $moms = $subTotal * $percent / 100;
+
+                $total = $subTotal + $moms
+            ?>
+            <tr height="30">
+                <td width="30%" valign="middle" align="right" style="padding: 0 10px; font-size:14px;">
+                    - Mängd rabatt:
+                </td>
+                <td width="70%" valign="middle" align="left" style="padding: 0 10px; font-size:14px;">
+                    <?php echo $preciorebaja; ?> SEK
+                </td>
+            </tr>
             <tr height="30">
                 <td width="30%" valign="middle" align="right" style="padding: 0 10px; font-size:14px;">
                     Moms:

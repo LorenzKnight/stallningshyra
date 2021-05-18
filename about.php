@@ -15,7 +15,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 
 <title><?php echo $pageName; ?></title>
 <link href="css/style.scss" rel="stylesheet" type="text/css"  media="all" />

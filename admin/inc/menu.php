@@ -11,23 +11,23 @@
         <li><a href="orders.php">Order</a></li>
         <li><a href="pushcarts.php">Pushcarts</a></li>
         <li><a href="weeks.php">Weeks 
-        <!-- <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0008") || $_SESSION['std_Nivel'] < 3) : ?>
+        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0008") || $_SESSION['std_Nivel'] < 3) : ?>
         <div class="flecha_derecha" style="float:right;"></div>
         <?php endif ?>
         </a>
           <div class="dropdown2-content">
             <ul>
               <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0008") || $_SESSION['std_Nivel'] < 3) : ?>
-              <li><a href="discountcodes.php">Discount codes</a></li>
+              <!-- <li><a href="discountcodes.php">Discount codes</a></li> -->
               <?php endif ?>
               <?php if($_SESSION['std_Nivel'] < 2) : ?>
               <li><a href="p_discount.php">Package discount</a></li>
               <?php endif ?>
               <?php if($_SESSION['std_Nivel'] < 2) : ?>
-              <li><a href="inactive_courses.php">Inactive Courses</a></li>
+              <!-- <li><a href="inactive_courses.php">Inactive Courses</a></li> -->
               <?php endif ?>
             </ul>
-          </div> -->
+          </div>
           </a>
         </li>
         <!-- <li><a href="customers.php">Customers</a></li> -->

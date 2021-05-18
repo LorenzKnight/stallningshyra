@@ -1,10 +1,828 @@
+<style>
+    @media only screen and (min-width: 320px) and (-webkit-device-pixel-ratio : 2) {
+        /*////////////////////////////////check-box style/////////////////////////////////////*/
+        .week_calender {
+            width: 100%;
+            height: 350px;
+            // background-color: #9d9d9e;
+        }
+        .week_obj {
+            width: 10.85%;
+            height: 101px;
+            background-color: orange;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        .week_obj_none {
+            width: 10.85%;
+            height: 101px;
+            background-color: #999;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        
+        .control-me::after {
+            background-color: #F0F0F0;
+            padding: 50.5px;
+        
+            position: absolute;
+            content: "";
+            -moz-transition: all 300ms ease-in-out 100ms;
+            -ms-transition: all 300ms ease-in-out 100ms;
+            -o-transition: all 300ms ease-in-out 100ms;
+            -webkit-transition: all 300ms ease-in-out 100ms;
+            transition: all 300ms ease-in-out 100ms;
+        }
+        #semana1:checked ~ .control-me::after,
+        #semana2:checked ~ .control-me::after,
+        #semana3:checked ~ .control-me::after,
+        #semana4:checked ~ .control-me::after,
+        #semana5:checked ~ .control-me::after,
+        #semana6:checked ~ .control-me::after,
+        #semana7:checked ~ .control-me::after,
+        #semana8:checked ~ .control-me::after,
+        #semana9:checked ~ .control-me::after,
+        #semana10:checked ~ .control-me::after,
+        #semana11:checked ~ .control-me::after,
+        #semana12:checked ~ .control-me::after,
+        #semana13:checked ~ .control-me::after,
+        #semana14:checked ~ .control-me::after,
+        #semana15:checked ~ .control-me::after,
+        #semana16:checked ~ .control-me::after,
+        #semana17:checked ~ .control-me::after,
+        #semana18:checked ~ .control-me::after,
+        #semana19:checked ~ .control-me::after,
+        #semana20:checked ~ .control-me::after,
+        #semana21:checked ~ .control-me::after,
+        #semana22:checked ~ .control-me::after,
+        #semana23:checked ~ .control-me::after,
+        #semana24:checked ~ .control-me::after,
+        #semana25:checked ~ .control-me::after,
+        #semana26:checked ~ .control-me::after,
+        #semana27:checked ~ .control-me::after,
+        #semana28:checked ~ .control-me::after,
+        #semana29:checked ~ .control-me::after,
+        #semana30:checked ~ .control-me::after,
+        #semana31:checked ~ .control-me::after,
+        #semana32:checked ~ .control-me::after,
+        #semana33:checked ~ .control-me::after,
+        #semana34:checked ~ .control-me::after,
+        #semana35:checked ~ .control-me::after,
+        #semana36:checked ~ .control-me::after,
+        #semana37:checked ~ .control-me::after,
+        #semana38:checked ~ .control-me::after,
+        #semana39:checked ~ .control-me::after,
+        #semana40:checked ~ .control-me::after,
+        #semana41:checked ~ .control-me::after,
+        #semana42:checked ~ .control-me::after,
+        #semana43:checked ~ .control-me::after,
+        #semana44:checked ~ .control-me::after,
+        #semana45:checked ~ .control-me::after,
+        #semana46:checked ~ .control-me::after,
+        #semana47:checked ~ .control-me::after,
+        #semana48:checked ~ .control-me::after,
+        #semana49:checked ~ .control-me::after,
+        #semana50:checked ~ .control-me::after,
+        #semana51:checked ~ .control-me::after,
+        #semana52:checked ~ .control-me::after,
+        
+        #semana53:checked ~ .control-me::after,
+        #semana54:checked ~ .control-me::after,
+        #semana55:checked ~ .control-me::after,
+        #semana56:checked ~ .control-me::after,
+        #semana57:checked ~ .control-me::after,
+        #semana58:checked ~ .control-me::after,
+        #semana59:checked ~ .control-me::after,
+        #semana60:checked ~ .control-me::after,
+        #semana61:checked ~ .control-me::after,
+        #semana62:checked ~ .control-me::after,
+        #semana63:checked ~ .control-me::after,
+        #semana64:checked ~ .control-me::after,
+        #semana65:checked ~ .control-me::after,
+        #semana66:checked ~ .control-me::after,
+        #semana67:checked ~ .control-me::after,
+        #semana68:checked ~ .control-me::after,
+        #semana69:checked ~ .control-me::after,
+        #semana70:checked ~ .control-me::after,
+        #semana71:checked ~ .control-me::after,
+        #semana72:checked ~ .control-me::after,
+        #semana73:checked ~ .control-me::after,
+        #semana74:checked ~ .control-me::after,
+        #semana75:checked ~ .control-me::after,
+        #semana76:checked ~ .control-me::after,
+        #semana77:checked ~ .control-me::after,
+        #semana78:checked ~ .control-me::after,
+        #semana79:checked ~ .control-me::after,
+        #semana80:checked ~ .control-me::after,
+        #semana81:checked ~ .control-me::after,
+        #semana82:checked ~ .control-me::after,
+        #semana83:checked ~ .control-me::after,
+        #semana84:checked ~ .control-me::after,
+        #semana85:checked ~ .control-me::after,
+        #semana86:checked ~ .control-me::after,
+        #semana87:checked ~ .control-me::after,
+        #semana88:checked ~ .control-me::after,
+        #semana89:checked ~ .control-me::after,
+        #semana90:checked ~ .control-me::after,
+        #semana91:checked ~ .control-me::after,
+        #semana92:checked ~ .control-me::after,
+        #semana93:checked ~ .control-me::after,
+        #semana94:checked ~ .control-me::after,
+        #semana95:checked ~ .control-me::after,
+        #semana96:checked ~ .control-me::after,
+        #semana97:checked ~ .control-me::after,
+        #semana98:checked ~ .control-me::after,
+        #semana99:checked ~ .control-me::after,
+        #semana100:checked ~ .control-me::after,
+        #semana101:checked ~ .control-me::after,
+        #semana102:checked ~ .control-me::after,
+        #semana103:checked ~ .control-me::after,
+        #semana104:checked ~ .control-me::after
+        {
+            background-color: orange;
+            padding: 50.5px;
+            border-radius: 50%;
+            content: ""; 
+        }
+        
+        input[type=checkbox] {
+            /* position: relative; */
+            cursor: pointer;
+        }
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: -3px;
+            left: -4px;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+            background-color: white;
+        }
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 15px;
+            
+            border: solid orange;
+            border-width: 0 4px 4px 0;
+            -webkit-transform: rotate(40deg);
+            -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+            position: absolute;
+            top: 1px;
+            left: 5px;
+        }
+        
+        label {
+            /* width: 48px;
+            height: 48px; */
+            /* background: #A5D6A7; */
+            color: #666;
+            margin: 1px;
+            padding: 32px 14px 30px 15px;
+            font-size: 30px;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            /* left: -100vw; */
+            /* opacity: 0; */
+            z-index: 1;
+            /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+        }
+        /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    }
+    @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
+        /*////////////////////////////////check-box style/////////////////////////////////////*/
+        .week_calender {
+            width: 100%;
+            height: 350px;
+            // background-color: #9d9d9e;
+        }
+        .week_obj {
+            width: 10.85%;
+            height: 101px;
+            background-color: orange;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        .week_obj_none {
+            width: 10.85%;
+            height: 101px;
+            background-color: #999;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        
+        .control-me::after {
+            background-color: #F0F0F0;
+            padding: 50.5px;
+        
+            position: absolute;
+            content: "";
+            -moz-transition: all 300ms ease-in-out 100ms;
+            -ms-transition: all 300ms ease-in-out 100ms;
+            -o-transition: all 300ms ease-in-out 100ms;
+            -webkit-transition: all 300ms ease-in-out 100ms;
+            transition: all 300ms ease-in-out 100ms;
+        }
+        #semana1:checked ~ .control-me::after,
+        #semana2:checked ~ .control-me::after,
+        #semana3:checked ~ .control-me::after,
+        #semana4:checked ~ .control-me::after,
+        #semana5:checked ~ .control-me::after,
+        #semana6:checked ~ .control-me::after,
+        #semana7:checked ~ .control-me::after,
+        #semana8:checked ~ .control-me::after,
+        #semana9:checked ~ .control-me::after,
+        #semana10:checked ~ .control-me::after,
+        #semana11:checked ~ .control-me::after,
+        #semana12:checked ~ .control-me::after,
+        #semana13:checked ~ .control-me::after,
+        #semana14:checked ~ .control-me::after,
+        #semana15:checked ~ .control-me::after,
+        #semana16:checked ~ .control-me::after,
+        #semana17:checked ~ .control-me::after,
+        #semana18:checked ~ .control-me::after,
+        #semana19:checked ~ .control-me::after,
+        #semana20:checked ~ .control-me::after,
+        #semana21:checked ~ .control-me::after,
+        #semana22:checked ~ .control-me::after,
+        #semana23:checked ~ .control-me::after,
+        #semana24:checked ~ .control-me::after,
+        #semana25:checked ~ .control-me::after,
+        #semana26:checked ~ .control-me::after,
+        #semana27:checked ~ .control-me::after,
+        #semana28:checked ~ .control-me::after,
+        #semana29:checked ~ .control-me::after,
+        #semana30:checked ~ .control-me::after,
+        #semana31:checked ~ .control-me::after,
+        #semana32:checked ~ .control-me::after,
+        #semana33:checked ~ .control-me::after,
+        #semana34:checked ~ .control-me::after,
+        #semana35:checked ~ .control-me::after,
+        #semana36:checked ~ .control-me::after,
+        #semana37:checked ~ .control-me::after,
+        #semana38:checked ~ .control-me::after,
+        #semana39:checked ~ .control-me::after,
+        #semana40:checked ~ .control-me::after,
+        #semana41:checked ~ .control-me::after,
+        #semana42:checked ~ .control-me::after,
+        #semana43:checked ~ .control-me::after,
+        #semana44:checked ~ .control-me::after,
+        #semana45:checked ~ .control-me::after,
+        #semana46:checked ~ .control-me::after,
+        #semana47:checked ~ .control-me::after,
+        #semana48:checked ~ .control-me::after,
+        #semana49:checked ~ .control-me::after,
+        #semana50:checked ~ .control-me::after,
+        #semana51:checked ~ .control-me::after,
+        #semana52:checked ~ .control-me::after,
+        
+        #semana53:checked ~ .control-me::after,
+        #semana54:checked ~ .control-me::after,
+        #semana55:checked ~ .control-me::after,
+        #semana56:checked ~ .control-me::after,
+        #semana57:checked ~ .control-me::after,
+        #semana58:checked ~ .control-me::after,
+        #semana59:checked ~ .control-me::after,
+        #semana60:checked ~ .control-me::after,
+        #semana61:checked ~ .control-me::after,
+        #semana62:checked ~ .control-me::after,
+        #semana63:checked ~ .control-me::after,
+        #semana64:checked ~ .control-me::after,
+        #semana65:checked ~ .control-me::after,
+        #semana66:checked ~ .control-me::after,
+        #semana67:checked ~ .control-me::after,
+        #semana68:checked ~ .control-me::after,
+        #semana69:checked ~ .control-me::after,
+        #semana70:checked ~ .control-me::after,
+        #semana71:checked ~ .control-me::after,
+        #semana72:checked ~ .control-me::after,
+        #semana73:checked ~ .control-me::after,
+        #semana74:checked ~ .control-me::after,
+        #semana75:checked ~ .control-me::after,
+        #semana76:checked ~ .control-me::after,
+        #semana77:checked ~ .control-me::after,
+        #semana78:checked ~ .control-me::after,
+        #semana79:checked ~ .control-me::after,
+        #semana80:checked ~ .control-me::after,
+        #semana81:checked ~ .control-me::after,
+        #semana82:checked ~ .control-me::after,
+        #semana83:checked ~ .control-me::after,
+        #semana84:checked ~ .control-me::after,
+        #semana85:checked ~ .control-me::after,
+        #semana86:checked ~ .control-me::after,
+        #semana87:checked ~ .control-me::after,
+        #semana88:checked ~ .control-me::after,
+        #semana89:checked ~ .control-me::after,
+        #semana90:checked ~ .control-me::after,
+        #semana91:checked ~ .control-me::after,
+        #semana92:checked ~ .control-me::after,
+        #semana93:checked ~ .control-me::after,
+        #semana94:checked ~ .control-me::after,
+        #semana95:checked ~ .control-me::after,
+        #semana96:checked ~ .control-me::after,
+        #semana97:checked ~ .control-me::after,
+        #semana98:checked ~ .control-me::after,
+        #semana99:checked ~ .control-me::after,
+        #semana100:checked ~ .control-me::after,
+        #semana101:checked ~ .control-me::after,
+        #semana102:checked ~ .control-me::after,
+        #semana103:checked ~ .control-me::after,
+        #semana104:checked ~ .control-me::after
+        {
+            background-color: orange;
+            padding: 50.5px;
+            border-radius: 50%;
+            content: ""; 
+        }
+        
+        input[type=checkbox] {
+            /* position: relative; */
+            cursor: pointer;
+        }
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: -3px;
+            left: -4px;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+            background-color: white;
+        }
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 15px;
+            
+            border: solid orange;
+            border-width: 0 4px 4px 0;
+            -webkit-transform: rotate(40deg);
+            -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+            position: absolute;
+            top: 1px;
+            left: 5px;
+        }
+        
+        label {
+            /* width: 48px;
+            height: 48px; */
+            /* background: #A5D6A7; */
+            color: #666;
+            margin: 1px;
+            padding: 32px 14px 30px 15px;
+            font-size: 30px;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            /* left: -100vw; */
+            /* opacity: 0; */
+            z-index: 1;
+            /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+        }
+        /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    }
+    @media (min-width: 768px) {
+        /*////////////////////////////////check-box style/////////////////////////////////////*/
+        .week_calender {
+            width: 100%;
+            height: 350px;
+            // background-color: #9d9d9e;
+        }
+        .week_obj {
+            width: 10.85%;
+            height: 101px;
+            background-color: orange;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        .week_obj_none {
+            width: 10.85%;
+            height: 101px;
+            background-color: #999;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        
+        .control-me::after {
+            background-color: #F0F0F0;
+            padding: 50.5px;
+        
+            position: absolute;
+            content: "";
+            -moz-transition: all 300ms ease-in-out 100ms;
+            -ms-transition: all 300ms ease-in-out 100ms;
+            -o-transition: all 300ms ease-in-out 100ms;
+            -webkit-transition: all 300ms ease-in-out 100ms;
+            transition: all 300ms ease-in-out 100ms;
+        }
+        #semana1:checked ~ .control-me::after,
+        #semana2:checked ~ .control-me::after,
+        #semana3:checked ~ .control-me::after,
+        #semana4:checked ~ .control-me::after,
+        #semana5:checked ~ .control-me::after,
+        #semana6:checked ~ .control-me::after,
+        #semana7:checked ~ .control-me::after,
+        #semana8:checked ~ .control-me::after,
+        #semana9:checked ~ .control-me::after,
+        #semana10:checked ~ .control-me::after,
+        #semana11:checked ~ .control-me::after,
+        #semana12:checked ~ .control-me::after,
+        #semana13:checked ~ .control-me::after,
+        #semana14:checked ~ .control-me::after,
+        #semana15:checked ~ .control-me::after,
+        #semana16:checked ~ .control-me::after,
+        #semana17:checked ~ .control-me::after,
+        #semana18:checked ~ .control-me::after,
+        #semana19:checked ~ .control-me::after,
+        #semana20:checked ~ .control-me::after,
+        #semana21:checked ~ .control-me::after,
+        #semana22:checked ~ .control-me::after,
+        #semana23:checked ~ .control-me::after,
+        #semana24:checked ~ .control-me::after,
+        #semana25:checked ~ .control-me::after,
+        #semana26:checked ~ .control-me::after,
+        #semana27:checked ~ .control-me::after,
+        #semana28:checked ~ .control-me::after,
+        #semana29:checked ~ .control-me::after,
+        #semana30:checked ~ .control-me::after,
+        #semana31:checked ~ .control-me::after,
+        #semana32:checked ~ .control-me::after,
+        #semana33:checked ~ .control-me::after,
+        #semana34:checked ~ .control-me::after,
+        #semana35:checked ~ .control-me::after,
+        #semana36:checked ~ .control-me::after,
+        #semana37:checked ~ .control-me::after,
+        #semana38:checked ~ .control-me::after,
+        #semana39:checked ~ .control-me::after,
+        #semana40:checked ~ .control-me::after,
+        #semana41:checked ~ .control-me::after,
+        #semana42:checked ~ .control-me::after,
+        #semana43:checked ~ .control-me::after,
+        #semana44:checked ~ .control-me::after,
+        #semana45:checked ~ .control-me::after,
+        #semana46:checked ~ .control-me::after,
+        #semana47:checked ~ .control-me::after,
+        #semana48:checked ~ .control-me::after,
+        #semana49:checked ~ .control-me::after,
+        #semana50:checked ~ .control-me::after,
+        #semana51:checked ~ .control-me::after,
+        #semana52:checked ~ .control-me::after,
+        
+        #semana53:checked ~ .control-me::after,
+        #semana54:checked ~ .control-me::after,
+        #semana55:checked ~ .control-me::after,
+        #semana56:checked ~ .control-me::after,
+        #semana57:checked ~ .control-me::after,
+        #semana58:checked ~ .control-me::after,
+        #semana59:checked ~ .control-me::after,
+        #semana60:checked ~ .control-me::after,
+        #semana61:checked ~ .control-me::after,
+        #semana62:checked ~ .control-me::after,
+        #semana63:checked ~ .control-me::after,
+        #semana64:checked ~ .control-me::after,
+        #semana65:checked ~ .control-me::after,
+        #semana66:checked ~ .control-me::after,
+        #semana67:checked ~ .control-me::after,
+        #semana68:checked ~ .control-me::after,
+        #semana69:checked ~ .control-me::after,
+        #semana70:checked ~ .control-me::after,
+        #semana71:checked ~ .control-me::after,
+        #semana72:checked ~ .control-me::after,
+        #semana73:checked ~ .control-me::after,
+        #semana74:checked ~ .control-me::after,
+        #semana75:checked ~ .control-me::after,
+        #semana76:checked ~ .control-me::after,
+        #semana77:checked ~ .control-me::after,
+        #semana78:checked ~ .control-me::after,
+        #semana79:checked ~ .control-me::after,
+        #semana80:checked ~ .control-me::after,
+        #semana81:checked ~ .control-me::after,
+        #semana82:checked ~ .control-me::after,
+        #semana83:checked ~ .control-me::after,
+        #semana84:checked ~ .control-me::after,
+        #semana85:checked ~ .control-me::after,
+        #semana86:checked ~ .control-me::after,
+        #semana87:checked ~ .control-me::after,
+        #semana88:checked ~ .control-me::after,
+        #semana89:checked ~ .control-me::after,
+        #semana90:checked ~ .control-me::after,
+        #semana91:checked ~ .control-me::after,
+        #semana92:checked ~ .control-me::after,
+        #semana93:checked ~ .control-me::after,
+        #semana94:checked ~ .control-me::after,
+        #semana95:checked ~ .control-me::after,
+        #semana96:checked ~ .control-me::after,
+        #semana97:checked ~ .control-me::after,
+        #semana98:checked ~ .control-me::after,
+        #semana99:checked ~ .control-me::after,
+        #semana100:checked ~ .control-me::after,
+        #semana101:checked ~ .control-me::after,
+        #semana102:checked ~ .control-me::after,
+        #semana103:checked ~ .control-me::after,
+        #semana104:checked ~ .control-me::after
+        {
+            background-color: orange;
+            padding: 50.5px;
+            border-radius: 50%;
+            content: ""; 
+        }
+        
+        input[type=checkbox] {
+            /* position: relative; */
+            cursor: pointer;
+        }
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: -3px;
+            left: -4px;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+            background-color: white;
+        }
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 15px;
+            
+            border: solid orange;
+            border-width: 0 4px 4px 0;
+            -webkit-transform: rotate(40deg);
+            -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+            position: absolute;
+            top: 1px;
+            left: 5px;
+        }
+        
+        label {
+            /* width: 48px;
+            height: 48px; */
+            /* background: #A5D6A7; */
+            color: #666;
+            margin: 1px;
+            padding: 32px 14px 30px 15px;
+            font-size: 30px;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            /* left: -100vw; */
+            /* opacity: 0; */
+            z-index: 1;
+            /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+        }
+        /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    }
+    @media (min-width: 1024px) {
+        /*/////////////////////////////////check-box style/////////////////////////////////////*/
+        .week_calender {
+            width: 400px;
+            height: 350px;
+            /* background-color: #9d9d9e; */
+        }
+        .week_obj {
+            width: 48px;
+            height: 48px;
+            background-color: orange;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        .week_obj_none {
+            width: 48px;
+            height: 48px;
+            background-color: #999;
+            margin: 1px;
+            border-radius: ;
+            text-align: left;
+            float: left;
+        }
+        
+        .control-me::after {
+            background-color: #F0F0F0;
+            padding: 24px;
+        
+            position: absolute;
+            content: "";
+            -moz-transition: all 300ms ease-in-out 100ms;
+            -ms-transition: all 300ms ease-in-out 100ms;
+            -o-transition: all 300ms ease-in-out 100ms;
+            -webkit-transition: all 300ms ease-in-out 100ms;
+            transition: all 300ms ease-in-out 100ms;
+        }
+        #semana1:checked ~ .control-me::after,
+        #semana2:checked ~ .control-me::after,
+        #semana3:checked ~ .control-me::after,
+        #semana4:checked ~ .control-me::after,
+        #semana5:checked ~ .control-me::after,
+        #semana6:checked ~ .control-me::after,
+        #semana7:checked ~ .control-me::after,
+        #semana8:checked ~ .control-me::after,
+        #semana9:checked ~ .control-me::after,
+        #semana10:checked ~ .control-me::after,
+        #semana11:checked ~ .control-me::after,
+        #semana12:checked ~ .control-me::after,
+        #semana13:checked ~ .control-me::after,
+        #semana14:checked ~ .control-me::after,
+        #semana15:checked ~ .control-me::after,
+        #semana16:checked ~ .control-me::after,
+        #semana17:checked ~ .control-me::after,
+        #semana18:checked ~ .control-me::after,
+        #semana19:checked ~ .control-me::after,
+        #semana20:checked ~ .control-me::after,
+        #semana21:checked ~ .control-me::after,
+        #semana22:checked ~ .control-me::after,
+        #semana23:checked ~ .control-me::after,
+        #semana24:checked ~ .control-me::after,
+        #semana25:checked ~ .control-me::after,
+        #semana26:checked ~ .control-me::after,
+        #semana27:checked ~ .control-me::after,
+        #semana28:checked ~ .control-me::after,
+        #semana29:checked ~ .control-me::after,
+        #semana30:checked ~ .control-me::after,
+        #semana31:checked ~ .control-me::after,
+        #semana32:checked ~ .control-me::after,
+        #semana33:checked ~ .control-me::after,
+        #semana34:checked ~ .control-me::after,
+        #semana35:checked ~ .control-me::after,
+        #semana36:checked ~ .control-me::after,
+        #semana37:checked ~ .control-me::after,
+        #semana38:checked ~ .control-me::after,
+        #semana39:checked ~ .control-me::after,
+        #semana40:checked ~ .control-me::after,
+        #semana41:checked ~ .control-me::after,
+        #semana42:checked ~ .control-me::after,
+        #semana43:checked ~ .control-me::after,
+        #semana44:checked ~ .control-me::after,
+        #semana45:checked ~ .control-me::after,
+        #semana46:checked ~ .control-me::after,
+        #semana47:checked ~ .control-me::after,
+        #semana48:checked ~ .control-me::after,
+        #semana49:checked ~ .control-me::after,
+        #semana50:checked ~ .control-me::after,
+        #semana51:checked ~ .control-me::after,
+        #semana52:checked ~ .control-me::after,
+        
+        #semana53:checked ~ .control-me::after,
+        #semana54:checked ~ .control-me::after,
+        #semana55:checked ~ .control-me::after,
+        #semana56:checked ~ .control-me::after,
+        #semana57:checked ~ .control-me::after,
+        #semana58:checked ~ .control-me::after,
+        #semana59:checked ~ .control-me::after,
+        #semana60:checked ~ .control-me::after,
+        #semana61:checked ~ .control-me::after,
+        #semana62:checked ~ .control-me::after,
+        #semana63:checked ~ .control-me::after,
+        #semana64:checked ~ .control-me::after,
+        #semana65:checked ~ .control-me::after,
+        #semana66:checked ~ .control-me::after,
+        #semana67:checked ~ .control-me::after,
+        #semana68:checked ~ .control-me::after,
+        #semana69:checked ~ .control-me::after,
+        #semana70:checked ~ .control-me::after,
+        #semana71:checked ~ .control-me::after,
+        #semana72:checked ~ .control-me::after,
+        #semana73:checked ~ .control-me::after,
+        #semana74:checked ~ .control-me::after,
+        #semana75:checked ~ .control-me::after,
+        #semana76:checked ~ .control-me::after,
+        #semana77:checked ~ .control-me::after,
+        #semana78:checked ~ .control-me::after,
+        #semana79:checked ~ .control-me::after,
+        #semana80:checked ~ .control-me::after,
+        #semana81:checked ~ .control-me::after,
+        #semana82:checked ~ .control-me::after,
+        #semana83:checked ~ .control-me::after,
+        #semana84:checked ~ .control-me::after,
+        #semana85:checked ~ .control-me::after,
+        #semana86:checked ~ .control-me::after,
+        #semana87:checked ~ .control-me::after,
+        #semana88:checked ~ .control-me::after,
+        #semana89:checked ~ .control-me::after,
+        #semana90:checked ~ .control-me::after,
+        #semana91:checked ~ .control-me::after,
+        #semana92:checked ~ .control-me::after,
+        #semana93:checked ~ .control-me::after,
+        #semana94:checked ~ .control-me::after,
+        #semana95:checked ~ .control-me::after,
+        #semana96:checked ~ .control-me::after,
+        #semana97:checked ~ .control-me::after,
+        #semana98:checked ~ .control-me::after,
+        #semana99:checked ~ .control-me::after,
+        #semana100:checked ~ .control-me::after,
+        #semana101:checked ~ .control-me::after,
+        #semana102:checked ~ .control-me::after,
+        #semana103:checked ~ .control-me::after,
+        #semana104:checked ~ .control-me::after
+        {
+            background-color: orange;
+            padding: 24px;
+            border-radius: 50%;
+            content: ""; 
+        }
+        
+        input[type=checkbox] {
+            /* position: relative; */
+            cursor: pointer;
+        }
+        input[type=checkbox]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: -3px;
+            left: -4px;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+            background-color: white;
+        }
+        input[type=checkbox]:checked:after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 9px;
+            
+            border: solid orange;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(40deg);
+            -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+            position: absolute;
+            top: 1px;
+            left: 3px;
+        }
+        
+        label {
+            /* width: 48px;
+            height: 48px; */
+            /* background: #A5D6A7; */
+            color: #666;
+            margin: 1px;
+            padding: 21px 9px 11px 12px;
+            font-size: 11px;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            /* left: -100vw; */
+            /* opacity: 0; */
+            z-index: 1;
+            /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+        }
+        /*////////////////////////////////////////////////////////////////////////////////////////////*/
+    }
+</style>
 <div class="form_frame" id="aparecer" style="display:<?php if (($totalRows_DatosProductSeleted > 0) && ($row_DatosProductSeleted['confirmed'] == 0)) echo "block"; ?>;">
-    <div class="formulario" style="width: 810px;">
+    <div class="formulario_week">
         <form class="form" action="reserve.php" method="post" name="formweeks" id="formweeks">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr height="50">
                     <td valign="middle" align="center">
-                        <h3><?php echo ObtenerNombreProducto($row_DatosProductSeleted['product']);?></h3>
+                        <h3 class="product_title"><?php echo ObtenerNombreProducto($row_DatosProductSeleted['product']);?></h3>
                     </td>
                 </tr>
                 <?php 
@@ -16,9 +834,7 @@
                 ?>
                 <tr height="30">
                     <td valign="middle" align="center" style="border-bottom:1px solid #F00;">
-                        <?php
-                            echo 'Nu är det vecka ' . $currentWeekNumber;
-                        ?>
+                        <p class="texto_original"><?php echo 'Nu är det vecka ' . $currentWeekNumber; ?></p>
                         <!-- </br> -->
                         <?php // echo $_SESSION['bkng_UserId'];?>
                     </td>
@@ -26,9 +842,9 @@
                 <tr>
                     <td>
                         <div class="scrollyears">
-                            <div class="years" style="margin: 0 10px 0 0;">
+                            <div class="years_1">
                                 <div class="year_title">
-                                    <?php echo 'Denna år ' . $currentYear; ?>
+                                    <p class="texto_original"><?php echo 'Denna år ' . $currentYear; ?></p>
                                 </div>
                                 <div class="week_calender">
                                     <div class="<?php if($currentWeekNumber < 1) { ?>
@@ -1179,9 +1995,9 @@
                             </div>
 
                         <!-- proximo ano -->
-                            <div class="years">
+                            <div class="years_2">
                                 <div class="year_title">
-                                    <?php echo 'Nästa år ' . $nextYear; ?>
+                                    <p class="texto_original"><?php echo 'Nästa år ' . $nextYear; ?></p>
                                 </div>
                                 <div class="week_calender">
                                     <div class="<?php if (semanasInactiva(1, $nextYear)) { 
@@ -2128,9 +2944,9 @@
                 <tr height="20">
                     <td></td>
                 </tr>
-                <tr height="60">
+                <tr height="80">
                     <td valign="middle" align="center" style="border-top:1px solid #F00;">
-                        <a href="cart_delete.php?carrieOff=<?php echo $row_DatosProductSeleted['product'];?>"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button_bok" value="Välja veckorna" />
+                        <a href="cart_delete.php?carrieOff=<?php echo $row_DatosProductSeleted['product'];?>"><input class="button_a" style="width: 170px; text-align: center;" value="Avbryt" /></a> <input type="submit" class="button_bok" value="Välja veckorna" />
                     </td>
                 </tr>
             </table>

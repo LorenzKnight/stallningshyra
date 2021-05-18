@@ -7,7 +7,7 @@
             <li><a href="contact.php" <?php if ($menuactive == 4) { ?> class="active" <?php }?>>kontakt</a></li>
             <li><a href="about.php" <?php if ($menuactive == 3) { ?> class="active" <?php }?>>om oss</a></li>
             <li><a href="index.php" <?php if ($menuactive == 1) { ?> class="active" <?php }?>>Hem</a></li>
-            <!-- <li><?php //echo $_SESSION["bkng_UserId"]; ?></li> -->
+            <li><?php echo $_SESSION["bkng_UserId"]; ?></li>
         <ul>
     </div>
 

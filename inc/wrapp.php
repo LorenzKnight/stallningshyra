@@ -11,7 +11,7 @@
         </div>
 
         <div class="caja_txt">
-                <h3 style="font-size:16px; text-transform: uppercase; margin:0;"><?php echo $row_DatosProducts['title']; ?></h3>
+                <h3 class="product_title"><?php echo $row_DatosProducts['title']; ?></h3>
                   <p><?php 
                         $texto= $row_DatosProducts['content'];
                         if (strlen($texto) > 5) {
@@ -45,7 +45,7 @@
         </div>
         <?php } ?>
         <div class="public_txt" style="text-align:<?php if($row_DatosPublication['foto'] == '') { ?> center <?php } ?>;">
-            <h1><?php echo $row_DatosPublication['title']; ?></h1>
+            <h1 class="product_title"><?php echo $row_DatosPublication['title']; ?></h1>
 
             <?php 
                 $texto = $row_DatosPublication['content'];

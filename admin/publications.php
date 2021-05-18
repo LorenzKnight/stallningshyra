@@ -81,9 +81,9 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
 <script>
   tinymce.init({
-    // mode : "textareas",
+    mode : "textareas",
     // selector: '#content',
-    selector: '#content2',
+    // selector: '#content2',
     width: 545,
     height: 200,
     menubar: 'file edit view insert format tools table',

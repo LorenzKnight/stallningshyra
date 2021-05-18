@@ -20,7 +20,7 @@
                     </td>
                 </tr>
                 <tr height="100">
-                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content" id="content" maxlength="2000" cols="65" rows="8" required></textarea></td>
+                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content" id="content" maxlength="2000" cols="65" rows="8"></textarea></td>
                 </tr>
                 <tr height="200">
                     <td colspan="2" valign="middle" align="right">
@@ -150,7 +150,7 @@
                     </td>
                 </tr>
                 <tr height="100">
-                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content2" id="content2" maxlength="2000" cols="65" rows="8" required><?php echo $row_DatosEdit['content'];?></textarea></td>
+                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content2" id="content2" maxlength="2000" cols="65" rows="8"><?php echo $row_DatosEdit['content'];?></textarea></td>
                 </tr>
                 <tr height="200">
                     <td colspan="2" valign="middle" align="right">
@@ -158,7 +158,7 @@
                             <tr>
                                 <td valign="middle" align="center">
 
-                                    <script src="js/scriptupload.js"></script>
+                                    <script src="../js/scriptupload.js"></script>
                                     <?php 
                                     //***********************BLOQUE INSERCION IMAGEN***********************//
                                     //***********************PARÁMETROS DE IMAGEN**************************//

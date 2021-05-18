@@ -7,15 +7,15 @@
                     <table class="tabla_formulario" border="0" cellspacing="0" cellpadding="0">
                         <tr height="60">
                             <td colspan="2" valign="middle" align="center">
-                                <h4>Hitta vagnar här</h4>
+                                <h4 class="texto_original_title">Hitta vagnar här</h4>
                             </td>
                         </tr>
                         <tr>
                             <td width="30%" valign="middle" align="right" style="font-size: 14px; color: #666;">
-                                Stad:
+                                <p class="texto_original">Stad:</P>
                             </td>
-                            <td width="70%" valign="middle" align="center" style="font-size: 14px; color: #666;">
-                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="city" id="city" onchange="validarForm();">
+                            <td width="70%" valign="middle" align="center">
+                                <select class="filter_dropdown" name="city" id="city" onchange="validarForm();">
                                 <option value="" selected>All</option>
                                 <?php
                                 if ($totalRows_DatosCities > 0) {
@@ -29,10 +29,10 @@
                         </tr>
                         <tr height="60">
                             <td width="" valign="middle" align="right" style="font-size: 14px; color: #666;">
-                                Storlek:
+                                <p class="texto_original">Storlek:</p>
                             </td>
-                            <td width="" valign="middle" align="center" style="font-size: 14px; color: #666;">
-                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="product_type" id="product_type" onchange="validarForm();">
+                            <td width="" valign="middle" align="center">
+                                <select class="filter_dropdown" name="product_type" id="product_type" onchange="validarForm();">
                                     <option value="" selected>All</option>
                                     <!-- <option value="0" <?php //if ($_GET['product_type'] == 0) echo "selected"; ?>>Alla</option> -->
                                     <option value="1" <?php if ($_GET['product_type'] == 1) echo "selected"; ?>>Små</option>
@@ -49,9 +49,9 @@
             <?php if($totalRows_DatosProductSeleted > 0): ?>
                 <div class="filtro_bok" id="aparecer" style="opacity: 0;">
                     <table class="tabla_formulario" border="0" cellspacing="0" cellpadding="0">
-                        <tr height="60">
+                        <tr height="70">
                             <td colspan="3" valign="middle" align="center">
-                                <?php echo ObtenerNombreProducto($row_DatosProductSeleted['product']);?>
+                                <p class="texto_original_title"><?php echo ObtenerNombreProducto($row_DatosProductSeleted['product']);?></p>
                             </td>
                         </tr>
                         <?php
@@ -61,14 +61,14 @@
                                 $priceWeek = ObtenerPrecioSemana($row_DatosCart['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
                             ?>
                         <tr height="25">
-                            <td width="40%" style="font-size:14px; padding:0 10px 0 0;" valign="middle" align="right">
-                                <?php echo ObtenerNombreSemana($row_DatosCart['id_week']);?>
+                            <td width="40%" style="padding:0 10px 0 0;" valign="middle" align="right">
+                                <p class="texto_oferta"><?php echo ObtenerNombreSemana($row_DatosCart['id_week']);?></p>
                             </td>
-                            <td width="20%" style="font-size:14px;" valign="middle" align="center">
-                                <?php echo ObtenerAnoSemana($row_DatosCart['id_week']);?>
+                            <td width="20%" style="" valign="middle" align="center">
+                                <p class="texto_oferta"><?php echo ObtenerAnoSemana($row_DatosCart['id_week']);?></p>
                             </td>
-                            <td width="40%" style="font-size:14px; padding:0 20px 0 0;" valign="middle" align="right">
-                                <?php echo $priceWeek;?> SEK
+                            <td width="40%" style="padding:0 20px 0 0;" valign="middle" align="right">
+                                <p class="texto_oferta"><?php echo $priceWeek;?> SEK</p>
                             </td>
                         </tr>
                         <?php $TotalSinImpuest = $TotalSinImpuest + $priceWeek; ?>
@@ -76,32 +76,47 @@
                         }
                         ?>
                         <tr height="30">
-                            <td width="60%" colspan="2" style="border-top:1px solid #F00; font-size:14px; padding:0 20px 0 0;" valign="middle" align="right">
-                                sub-total:
+                            <td width="60%" colspan="2" style="border-top:1px solid #F00; padding:0 20px 0 0;" valign="middle" align="right">
+                                <p class="texto_oferta">sub-total:</p>
                             </td>
                             
                             <td width="40%" style="border-top:1px solid #F00; font-size:14px; padding:0 20px 0 0;" valign="middle" align="right">
-                                <?php echo $TotalSinImpuest; ?> SEK
+                                <p class="texto_oferta"><?php echo $TotalSinImpuest; ?> SEK</p>
                             </td>
                         </tr>
                             <?php
-                                $moms = $TotalSinImpuest * 0.25;
-                                $total = $moms + $TotalSinImpuest;
+                                $resprosent = ObtenerPDescuento($totalRows_DatosCart);
+                                $preciorebaja = $TotalSinImpuest / 100 * $resprosent;
+
+                                $subTotal = $TotalSinImpuest - $preciorebaja;
+
+                                $moms = $subTotal * 0.25;
+                                $total = $moms + $subTotal;
                             ?>
+                        <?php if ($totalRows_DatosCart > 1) {?>
                         <tr height="30">
                             <td width="60%" colspan="2" style="padding:0 20px 0 0; font-size:14px;" valign="middle" align="right">
-                                Moms:
+                                <p class="texto_oferta">- Mängd rabatt:</p>
                             </td>
                             <td width="40%" style="font-size:14px; padding:0 20px 0 0;" valign="middle" align="right">
-                                <?php echo $moms; ?> SEK
+                                <p class="texto_oferta"><?php echo $preciorebaja; ?> SEK</p>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                        <tr height="30">
+                            <td width="60%" colspan="2" style="padding:0 20px 0 0; font-size:14px;" valign="middle" align="right">
+                                <p class="texto_oferta">+ Moms:</p>
+                            </td>
+                            <td width="40%" style="font-size:14px; padding:0 20px 0 0;" valign="middle" align="right">
+                                <p class="texto_oferta"><?php echo $moms; ?> SEK</p>
                             </td>
                         </tr>
                         <tr height="30">
                             <td width="60%" colspan="2" style="border-top:1px solid #F00; font-size:14px; font-weight: 600; padding:0 20px 0 0;" valign="middle" align="right">
-                                Total:
+                                <p class="texto_oferta">Total:</p>
                             </td>
                             <td width="40%" style="border-top:1px solid #F00; font-size:14px; padding:0 20px 0 0; font-weight: 600;" valign="middle" align="right">
-                                <?php echo $total ?> SEK
+                                <p class="texto_oferta"><?php echo $total ?> SEK</p>
                             </td>
                         </tr>
                         <tr height="60">
@@ -125,24 +140,24 @@
                     <table style="width:100%; background-color:;" border="0" cellspacing="0" cellpadding="0">
                         <tr height="60">
                             <td>
-                                <h3 style="text-transform: uppercase; margin-bottom: 0;"><?php echo $row_DatosConsulta['name']; ?> -
-                                <span style="font-size:12px; text-transform: none;"><?php echo ObtenerCiudadProducto($row_DatosConsulta['city']); ?></span>
+                                <h3 class="product_title_small"><?php echo $row_DatosConsulta['name']; ?> -
+                                <span class="span_producto"><?php echo ObtenerCiudadProducto($row_DatosConsulta['city']); ?></span>
                                 </h3>
                             </td>
                         </tr>
-                        <tr height="230">
+                        <tr height="30">
                             <td valign="top" align="left">
                                 <P><?php 
                                     $texto = $row_DatosConsulta['description'];
                                     if (strlen($texto) > 5) {
                                         $texto = substr($texto,0,300).'...';
-                                    print '<div class="texto_original">'.$texto.'</div>';
+                                    print '<div class="texto_original_small">'.$texto.'</div>';
                                 ?></p>
                                 <?php
                                 }
                                 ?>
                             </td>
-                        <tr height="60">
+                        <tr height="30">
                             <td valign="middle" align="center">
                                 <?php if($totalRows_DatosProductSeleted == 0) {?>
                                 <form action="reserve.php" method="post" name="formproduct" id="formproduct">

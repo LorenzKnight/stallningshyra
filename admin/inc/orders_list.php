@@ -8,10 +8,10 @@
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
     </div>
-    
+
     <div style="width:100px; text-align:center; color:#FFF; text-shadow: 0px 1px 15px rgba(58, 59, 69, 0.63); font-size:14px;">
-        <a style="margin: 0;" href="orders.php"><button type="" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" value="">Rensa</button> </a><br/>
-        <?php echo $totalRows_DatosConsulta; ?> elev(er)
+        <a style="margin: 0;" href="orders.php"><button type="" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" value="">Clear</button> </a><br/>
+        <?php echo $totalRows_DatosConsulta; ?> order(s)
     </div>
 </div>
 <div class="<?php echo divWrapp(UserAppearance($_SESSION['std_UserId']));?>">

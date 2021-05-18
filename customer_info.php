@@ -58,6 +58,7 @@
     $row_DatosClient = mysqli_fetch_assoc($DatosClient);
     $totalRows_DatosClient = mysqli_num_rows($DatosClient);
 ?>
+
 <?php
     $editFormAction = $_SERVER['PHP_SELF'];
     if (isset($_SERVER['QUERY_STRING'])) {
@@ -121,7 +122,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 
 <title><?php echo $pageName; ?></title>
 <link href="css/style.scss" rel="stylesheet" type="text/css"  media="all" />

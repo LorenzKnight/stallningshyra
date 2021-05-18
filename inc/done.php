@@ -1,47 +1,82 @@
+<style>
+    @media only screen and (min-width: 320px) and (-webkit-device-pixel-ratio : 2) {
+        .div_done {
+            width: 85%;
+            /* height: 800px; */
+            overflow: auto;
+            background-color: #FFF;
+            font-size: 16px;
+            text-align: center;
+            margin: 100px auto 0;
+            padding: 100px 5% 100px;
+        }
+    }
+
+    @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) { 
+        .div_done {
+            width: 85%;
+            /* height: 800px; */
+            overflow: auto;
+            background-color: #FFF;
+            font-size: 16px;
+            text-align: center;
+            margin: 100px auto 0;
+            padding: 100px 5% 100px;
+        }
+    }
+
+    @media (min-width: 768px) { 
+        .div_done {
+            width: 85%;
+            /* height: 800px; */
+            overflow: auto;
+            background-color: #FFF;
+            font-size: 16px;
+            text-align: center;
+            margin: 100px auto 0;
+            padding: 100px 5% 100px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .div_done {
+            width: 500px;
+            /* height: 800px; */
+            overflow: auto;
+            background-color: #FFF;
+            font-size: 16px;
+            text-align: center;
+            margin: 100px auto 0;
+            padding: 50px 5%;
+        }
+    }
+</style>
 <?php if($_GET['payment'] != ""): ?>
     <?php
-        if ($totalRows_DatosCart > 0) {
-            do { 
-                $priceWeek = ObtenerPrecioSemana($row_DatosCart['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
-                $TotalSinImpuest = $TotalSinImpuest + $priceWeek; 
-            } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
-        }
-    ?>
-    <?php
-        $tax = $row_DatosTaxes['percent'];
-        $moms = $TotalSinImpuest * $tax / 100;
-        $total = $moms + $TotalSinImpuest;
-    
-        $cliente = $_GET['payment'];
-        $product = $row_DatosProductSeleted['product'];
-        $orderno = $_GET['payment'].rand(100000000,900000000);
-        $status = 2;
-        // $payment = $_GET['payment'];
-        $payment = 1;
-    ?>
-    <?php if(ordenRegistrada(date('Y-m-d'), $cliente)) { ?>
-        <?php ConfirmationPago(date('Y'), date('m'), date('d'), $cliente, $product, $orderno, $status, $payment, $TotalSinImpuest, $total); ?>
-    <?php } ?>
-<div class="form_frame" id="aparecer" style="display:<?php if ($_GET['payment'] != "") echo "block"; ?>; min-height: 1400px; position:absolute;">
-    
-        <div class="recibo" style="font-size: 16px; text-align: center; padding-top: 100px;">
-            <h3>Tack för din bokning <?php echo $row_DatosClient['name'];?> <?php echo $row_DatosClient['surname'];?></h3>
-            Du kommer få ett mail med din faktura,</br>
-            Så fort du genomför betalning då kommer du få en bekreftelse</br>
-            där det stå en order nummer för att hämta den vagn du har bokat.</br>
-            </br>
-            Mailet kan ta några minuter innan den kommer fram</br>
-            Ser du inte våran mail då är det möjligt att den har hamnat i din skräp post,</br>
-            då är det bara att kika där.
-            </br>
-            </br>
-            </br>
-            <a href="inc/logout.php"><input type="submit" class="button_bok" value="Ok" /></a>
-        </div>
+        // if ($totalRows_DatosCart > 0) {
+        //     do { 
+        //         $priceWeek = ObtenerPrecioSemana($row_DatosCart['id_week']) + ObtenerPrecioProducto($row_DatosProductSeleted['product']);
+        //         $TotalSinImpuest = $TotalSinImpuest + $priceWeek; 
+        //     } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
+        // }
+        // $resprosent = ObtenerPDescuento($totalRows_DatosCart);
+        // $preciorebaja = $TotalSinImpuest / 100 * $resprosent;
 
-        <div class="theemail">
-            <?php //echo $_SESSION['bkng_UserId']; ?>
-            <?php 
+        // $subTotal = $TotalSinImpuest - $preciorebaja;
+
+        // $tax = $row_DatosTaxes['percent'];
+        // $moms = $subTotal * $tax / 100;
+        // $total = $moms + $subTotal;
+    
+        
+        
+        
+        
+        // $payment = $_GET['payment'];
+        
+        
+    ?>
+    <?php 
                 $nombre = $row_DatosClient['name'];
                 $apellido = $row_DatosClient['surname'];
                 $direccion = $row_DatosClient['adress'];
@@ -49,8 +84,13 @@
                 $ciudad = $row_DatosClient['city'];
                 $email = $row_DatosClient['email'];
                 $clientNo = $row_DatosClient['client_no'];
+                $cliente = $_GET['payment'];
                 $producto = ObtenerNombreProducto($row_DatosProductSeleted['product']);
-                $semanas = SemanasParaMail($row_DatosClient['id_client'], $row_DatosProductSeleted['product']);
+                $product_id = $row_DatosProductSeleted['product'];
+                $orderno = $_GET['payment'].rand(100000000,900000000);
+                
+                $status = 2;
+                $payment = 1;
 
                 $fecha_actual = $row_DatosCart2['date'];
                 //sumo 1 semana
@@ -63,9 +103,41 @@
                         $TotalSinImpuest2 = $TotalSinImpuest2 + $priceWeek2; 
                     } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
                 }
-                $tax = $row_DatosTaxes['percent'];
-                $moms2 = $TotalSinImpuest2 * $tax / 100;
-                $total2 = $moms2 + $TotalSinImpuest2;
+                $resprosent2 = ObtenerPDescuento($totalRows_DatosCart2);
+                $preciorebaja2 = $TotalSinImpuest2 / 100 * $resprosent2;
+
+                $subTotal2 = $TotalSinImpuest2 - $preciorebaja2;
+
+                $tax2 = $row_DatosTaxes['percent'];
+                $moms2 = $subTotal2 * $tax2 / 100;
+                $total2 = $moms2 + $subTotal2;
+            ?>
+            <?php if(ordenRegistrada(date('Y-m-d'), $cliente)) { ?>
+                <?php ConfirmationPago(date('Y'), date('m'), date('d'), $cliente, $product_id, $orderno, $status, $payment, $TotalSinImpuest2, $preciorebaja2, $total2); ?>
+            <?php } ?>
+
+    <div class="form_frame" id="aparecer" style="display:<?php if ($_GET['payment'] != "") echo "block"; ?>; min-height: 1400px; position:absolute;">
+    
+        <div class="div_done">
+            <h3 class="texto_original">Tack för din bokning <?php echo $row_DatosClient['name'];?> <?php echo $row_DatosClient['surname'];?></h3>
+            <p class="texto_oferta">Du kommer få ett mail med din faktura,</br>
+            Så fort du genomför betalning då kommer du få en bekreftelse</br>
+            där det stå en order nummer för att hämta den vagn du har bokat.</br>
+            </br>
+            Mailet kan ta några minuter innan den kommer fram</br>
+            Ser du inte våran mail då är det möjligt att den har hamnat i din skräp post,</br>
+            då är det bara att kika där.</p>
+            
+            </br>
+            </br>
+            </br>
+            <a href="inc/logout.php"><input type="submit" class="button_bok" value="Ok" /></a>
+        </div>
+        
+        <div class="theemail">
+            <?php //echo $_SESSION['bkng_UserId']; ?>
+            <?php
+                $semanas = SemanasParaMail($row_DatosClient['id_client'], $row_DatosProductSeleted['product']);
             ?>
             <?php
             $contenido='
@@ -80,9 +152,12 @@
                 </tr>
                 <tr height="40">
                     <td colspan="4" valign="middle" align="left" style="color: #666; font-size: 14px;">';
-            $contenido.=$nombre; $contenido.='&nbsp;'; $contenido.=$apellido; $contenido.='</br>';
-            $contenido.=$direccion; $contenido.='</br>';
-            $contenido.=$post; $contenido.='&nbsp;'; $contenido.=$ciudad; $contenido.='</br>';
+            $contenido.=$nombre; $contenido.='&nbsp;'; $contenido.=$apellido; 
+            $contenido.='<br>';
+            $contenido.=$direccion; 
+            $contenido.='<br>';
+            $contenido.=$post; $contenido.='&nbsp;'; $contenido.=$ciudad; 
+            $contenido.='<br>';
             $contenido.='
                     </td>
                 </tr>
@@ -155,13 +230,30 @@ $contenido.='</div>
                         
                     </td>
                     <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+                        Mängd rabatt:
+                    </td>
+                    <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        
+                    </td>
+                    <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+                    - '; $contenido.=$preciorebaja2; $contenido.=' SEK
+                    </td>
+                </tr>
+                <tr height="30">
+                    <td colspan="1" width="40%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        
+                    </td>
+                    <td colspan="1" width="8%" valign="middle" align="left" style="color: #666; font-size: 14px;">
+                        
+                    </td>
+                    <td colspan="1" width="25%" valign="middle" align="right" style="color: #666; font-size: 14px;">
                         Moms:
                     </td>
                     <td colspan="1" width="7%" valign="middle" align="left" style="color: #666; font-size: 14px;">
                         
                     </td>
-                    <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">';
-            $contenido.=$moms2; $contenido.=' SEK
+                    <td colspan="1" width="20%" valign="middle" align="right" style="color: #666; font-size: 14px;">
+                    + '; $contenido.=$moms2; $contenido.=' SEK
                     </td>
                 </tr>
                 <tr height="30">
@@ -257,14 +349,14 @@ $contenido.='</div>
             SendMailHtml($email, $contenido, $asunto);
             ?>
         </div>
-</div>
-<style>
-.theemail {
-    width: 680px;
-    margin: 0 auto;
-    padding: 3% 2%;
-    background-color: white;
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
-}
-</style>
+    </div>
+    <style>
+    .theemail {
+        width: 680px;
+        margin: 0 auto;
+        padding: 3% 2%;
+        background-color: white;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+    }
+    </style>
 <?php endif ?>
